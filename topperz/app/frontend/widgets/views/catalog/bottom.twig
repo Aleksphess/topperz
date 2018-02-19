@@ -1,0 +1,15 @@
+<div class="col-xs-12 col-sm-8 col-md-6 col-lg-5">
+    <div class="block-2">
+        <div class="title_block">{#Меню#}{{ this.params.all_menu }}</div>
+        {% for category in categories %}
+        {% if loop.first or loop.index%5==1 %}
+        <ul class="menu_list_{% if loop.index<6 %}1{% set x =1 %}{% else %}2{% set x =2 %}{% endif %}">
+            {% endif %}
+            <li class="item"><a href="{{ category.url }}">{{ category.info.title }}</a></li>
+            {% if loop.last or loop.index%5==0 %}
+        </ul>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+</div>

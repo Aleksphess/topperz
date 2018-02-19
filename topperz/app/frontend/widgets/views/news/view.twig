@@ -1,0 +1,19 @@
+<section class="section section--news">
+    <div class="container">
+        <h2 class="section__title">{{ this.params.news }}</h2>
+        <div class="section__content">
+            <div class="row">
+                {% for new in news %}
+                <div class="col col--6-of-12 col--s-12-of-12 col--m-6-of-12 col--l-6-of-12">
+                    <article class="news">
+                        <div class="news__inner"><a class="news__photo" href="{{ new.url }}"><img src="{{ new.simg }}" alt="{{ new.info.title }}"></a>
+                            <div class="news__date">{{ new.custom_date }}</div>
+                            <h3 class="news__title"><a href="{{ new.url }}">{{ new.info.title }}</a></h3>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

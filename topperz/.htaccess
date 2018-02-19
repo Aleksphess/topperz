@@ -1,0 +1,46 @@
+AddHandler application/x-httpd-php71 .php 
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  RewriteCond %{REQUEST_URI} !^public
+  RewriteCond %{REQUEST_URI} !\.(rar)$
+  RewriteCond %{REQUEST_URI} !\.(csv)$
+
+  RewriteRule ^images/projects/ images/projects/wm.php [L]
+  RewriteRule ^images/news/ images/news/wm.php [L]
+
+
+  
+  RewriteRule ^(.*)$ app/frontend/web/$1 [L]
+
+# without www to www...
+#RewriteCond %{HTTP_HOST} ^test4.digitalforce.ua$
+#RewriteRule (.*) http://www.test4.digitalforce.ua/$1 [R=301,L]
+
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# ->www
+#RewriteCond %{HTTP_HOST} ^([^www].*)$
+#RewriteRule ^(.*)$ http://www.%1/$1 [L,R=301]
+
+</IfModule>
+
+# Deny accessing below extensions
+<Files ~ "(.json|.lock|.git)">
+Order allow,deny
+Deny from all
+</Files>
+
+
+# Deny accessing dot files
+RewriteRule (^\.|/\.) - [F]
+
+
+
+
+
+<IfModule mod_headers.c>
+#	Отключить сниффинг
+	Header always set X-Content-Type-Options nosniff
+</IfModule>

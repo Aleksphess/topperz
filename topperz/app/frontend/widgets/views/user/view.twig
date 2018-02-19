@@ -1,0 +1,3 @@
+<div class="customer-data">
+    <div class="customer-data__text">{#Вы вошли на сайт, как #}{{ this.params.insert_to_site }} <a class="customer-data__link" href="{{ Url.to('/user/index') }}">{{ app.user.identity.username }}</a> (ID {{ app.user.identity.id }})</div><a class="customer-data__action btn btn--primary btn--md" href="{{ Url.toRoute('/user/index') }}">{{ this.params.my_data }}</a>
+</div>

@@ -1,0 +1,25 @@
+DirectoryIndex router.php
+
+AddDefaultCharset utf-8
+
+RewriteEngine on
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|gif|png|css|zip|doc|php|js|pdf|txt|ico)$
+#RewriteCond %{REQUEST_FILENAME} !content/(.*)$
+#RewriteCond %{REQUEST_FILENAME} !js/(.*)$
+#RewriteCond %{REQUEST_FILENAME} !css/(.*)$
+#RewriteCond %{REQUEST_FILENAME} !img/(.*)$
+#RewriteCond %{REQUEST_FILENAME} !ckeditor/(.*)$
+
+
+RewriteCond %{REQUEST_FILENAME} !modules\/test\/ajax/(.*)$
+#RewriteRule ^modules\/test\/(.*)$ router.php?inc=modules/test/index [NC,QSA,L]
+RewriteRule ^modules\/test\/(.*)$ router.php?inc=modules/test/index&cat=$1 [NC,QSA,L]
+
+RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|gif|png|css|zip|doc|js|pdf|txt|ico)$
+RewriteCond %{REQUEST_FILENAME} !ckfinder/(.*)$
+RewriteRule ^(.*)\.php$ router.php?inc=$1 [NC,QSA,L]
+
+#php_flag display_errors On

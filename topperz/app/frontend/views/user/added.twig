@@ -1,0 +1,6 @@
+{% if not(app.user.identity.address) %}<label for="address">{#Адрес доставки#}{{ this.params.delivery_address }}:</label>{% endif %}
+
+    <input type="text" name="address" class="address js-none-{{ address.id }} js-change-{{ address.id }}"  placeholder="адрес доставки" value="{{ address.address }}">
+<button data-id="{{ address.id }}" class=" btn_address_delete js-none-{{ address.id }} js-delete-address">×</button><span class="js-success-change-{{ address.id }}"></span>
+
+<button class="btn_address js-none-{{ address.id }} js-change-address" data-id="{{ address.id }}">{{ this.params.change }}</button>

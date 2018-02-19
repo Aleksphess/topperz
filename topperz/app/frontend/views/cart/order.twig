@@ -1,0 +1,167 @@
+
+
+<section class="ordering_page">
+    <div class="container">
+        <div class="head_section">
+            {#Оформления заказа#}{{ this.params.order_offer }}
+        </div>
+
+        <div class="form_box">
+
+            <form action="" class="ordering_form">
+
+                <div class="item_form">
+                    <div class="small_head">{#Контактная информация#}{{ this.params.contact_info }}</div>
+
+                    <input type="text" class="txt_input name js-name" placeholder="{{ this.params.your_name }}" {% if not(app.user.isGuest) %}value="{{ app.user.identity.username }}{% endif %}">
+                    <input type="tel" class="txt_input phone js-phone" placeholder="{{ this.params.phone }}" {% if not(app.user.isGuest) %}value="{{ app.user.identity.phone }}{% endif %}">
+                    <input type="email" class="txt_input email js-email" placeholder="e-mail" {% if not(app.user.isGuest) %}value="{{ app.user.identity.email }}{% endif %}">
+                    {% if not(app.user.isGuest) %}
+                        {% if app.user.identity.address|length>1 %}
+                            <select type="text" class="txt_input address js-address" placeholder="{#Адрес доставки#}{{ this.params.address_to_delivery }}" >
+                                {% for address in app.user.identity.address %}
+                                <option value="{{ address.address }}">{{ address.address }}</option>
+                                {% endfor %}
+                            </select>
+                            {% else %}
+                                <input type="text" class="txt_input address js-address" placeholder="{{ this.params.address_to_delivery }}" value="{% for address in app.user.identity.address %}{{ address.address }}{% endfor %}" >
+
+                        {% endif %}
+                    {% else %}
+                        <input type="text" class="txt_input address js-address" placeholder="{{ this.params.address_to_delivery }}" >
+                    {% endif %}
+
+
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">{#Способ оплаты#}{{ this.params.delivery_type }}</div>
+
+                    <label class="custom_label cl_1">
+                        <input name="radio_payment js-pay" class="js-pay" type="radio" checked value="2" />
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">{#Наличыми курьеру#}{{ this.params.courier }}</span>
+                        </div>
+
+                    </label>
+
+                    <label class="custom_label cl_2">
+                        <input name="radio_payment js-pay" class="js-pay" type="radio" value="9"/>
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">{#Банковской картой#}{{ this.params.online_pay }} (Visa/Mastercard)</span>
+                        </div>
+                    </label>
+
+                    <label class="custom_label cl_3">
+                        <input name="radio_payment js-pay" class="js-pay" type="radio"  value="10"/>
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">{#счет-фактура (для конрпоративных клиентов)#}{{ this.params.factura }}</span>
+                        </div>
+                    </label>
+
+
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">{#Способ доставки#}{{ this.params.delivery_type }}</div>
+
+                    <label class="custom_label cl_4">
+                        <input name="radio_delivery" class="js-delivery" type="radio" checked  value="1"/>
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">{#Курьером#}{{ this.params.one_courier }}</span>
+                        </div>
+                    </label>
+
+                    {#<label class="custom_label cl_5">
+                        <input name="radio_delivery" class="js-delivery" type="radio"  value="7"/>
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">Самовывоз c магазина</span>
+                        </div>
+                    </label>#}
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">{#Комментарий к заказу#}{{ this.params.comment_to_order }}</div>
+
+                    <textarea name="comment" type="text" class="comment js-comment"  placeholder="{#Введите ваши пожелания#}{{ this.params.wishes }}"></textarea>
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">{#Информация о заказе#}{{ this.params.info_about_order }}</div>
+                    <div class="scroll_box">
+            <div class="basket_box">
+                <div class="head_basket">
+                    <ul class="head_basket_list">
+                        <li class="item">{#Товар#}{{ this.params.tovar }}</li>
+                        <li class="item">{#Вес#}{{ this.params.weight }}</li>
+                        <li class="item">{#Цена#}{{ this.params.pricee }}</li>
+                        <li class="item">{#Количество#}{{ this.params.countt }}</li>
+                        <li class="item">{#Сумма#}{{ this.params.all_price }}</li>
+                        <li class="item"> </li>
+                    </ul>
+                </div>
+                <div class="content_basket">
+                    {% for param in params %}
+
+                        <div class="item_basket js-remove-from-backet-{{ param.id }}">
+                            <ul class="item_basket_list">
+                                <li class="item">
+                                    <a href="{{ param.url }}" class="link_item">
+                            <span class="img">
+                                <img src="{{ param.simg }}" alt="">
+                            </span>
+                                        <span class="txt">{{ param.title }}</span>
+                                    </a>
+                                </li>
+                                <li class="item">{{ param.weight }} г</li>
+                                <li class="item">{{ param.price }} {{ this.params.grn }}</li>
+                                <li class="item">
+                                    <div class="b-product__qty">
+
+                                        <input type="text" name="count" data-price="800" class="js-qty-input js-count-requst-{{ param.id }}" value="{{ param.count_order }}" disabled>
+
+                                    </div>
+                                </li>
+                                <li class="item "><span class="js-change-price-{{ param.id }}">{{ param.full_price }}</span> {{ this.params.grn }}</li>
+                                <li class="item js-delete-from-backet" data-id="{{ param.id }}"></li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        <div class="buttons_group">
+
+            <div class="right_group">
+                <div class="price_all">
+                    <span class="title">{{ this.params.itogo }}:</span>
+                    <span class="value">{% set x = this.params.cost+50 %}
+                        <span class="js-order-price" data-price="{{ x }}">{{ x }}</span>
+                        <span>грн</span></li>
+                    </span>
+                </div>
+
+                <span class="btn_checkout js-order-request">{{ this.params.give_order }}</span>
+
+            </div>
+            <div class="left_group">
+
+                <div><span>{#Товаров на#}{{ this.params.tovarov_na }}: </span><span>{{ this.params.cost }}</span><span>{#грн#}{{ this.params.grn }}</span></div>
+                <div><span>{#Стоимость доставки#}{{ this.params.delivery_cost }}: </span><span>50</span><span>{{ this.params.grn }}</span></div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

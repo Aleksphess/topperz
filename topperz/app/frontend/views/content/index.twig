@@ -1,0 +1,112 @@
+
+
+<section class="bxSlider_section_1">
+    <div class="container is__rellative">
+        <div class="js--bxSlider_1">
+            {% for slide in slides %}
+            <div class="bxSlider_1_item">
+                <img src="{{ slide.imgpng }}" alt="{{ slide.info.title }}">
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="slider_control">
+            <div class="slider-prev"></div>
+            <div class="slider-next"></div>
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+<section class="section_nav_menu_bottom">
+    <div class="container">
+        <ul class="nav_menu_bottom">
+            <li class="item_menu_bottom">
+                <a href="{{ Url.toRoute('/category') }}" class="link">
+                    <div class="img_link">
+                    </div>
+                    <div class="txt_link">
+                        {#Все меню#}{{ this.params.all_menu }}
+                    </div>
+                </a>
+            </li>
+            {% for category in categories %}
+            <li class="item_menu_bottom">
+                <a href="{{ category.url }}" class="link {% if category.id==6 %}link_1{% endif %}">
+                    <div class="img_link" style="background-image: url({{ category.imgpng }}">
+                    </div>
+                    <div class="txt_link">
+                        {{ category.info.title }}
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+
+</section>
+
+<section class="section_goods">
+    <div class="container">
+        <div class="row">
+
+            {% for product in products %}
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 is__padding_0">
+                <div class="cart_goods">
+                    <div class="name_cart"><a href="{{ product.url }}">{{ product.info.title }}</a></div>
+                    <a href="{{ product.url }}"><div class="img_cart" style="background-image: url('{{ product.bimg }}')"></div></a>                    <ul class="size_goods js-category-{{ product.id }}">
+                        {% for params in product.params %}
+                        <li data-price="{{  params.price }}" data-id="{{ params.id  }}" class="item {% if loop.first %}active{% endif %}">
+                            <div class="circle_part js-change-price" data-price="{{ params.price }}" data-id="{{ product.id }}" >
+                                <div class="item_value">{{ params.value }}</div>
+                                <div class="item_txt">{{ params.info.type }}</div>
+                            </div>
+
+                            <div class="inline_part">
+                                {{ params.weight }} г
+                            </div>
+
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                    <div class="price">
+                        {% for params in product.params %}
+                            {% if loop.first %}
+                                <span class="count js-count-view-{{ product.id }}">{{ params.price }}</span>
+                            {% endif %}
+                        {% endfor %}
+                        <span class="txt">грн</span>
+                    </div>
+
+                    <div class="b-product__qty">
+                        <span class="js-qty-minus js-count-in-catalog" data-id="{{ product.id }}">-</span>
+                        <input type="text" pattern="\d [1-9]" name="" data-id="{{ product.id }}" class="js-qty-input js-count-add-{{ product.id }}" value="1">
+                        <span class="js-qty-plus js-count-in-catalog" data-id="{{ product.id }}">+</span>
+                    </div>
+
+                    <div class="but_add">
+                        <a href="" data-id="{{ product.id }}" class="js-add-to-cart">{#Добавить в  коробку#}{{ this.params.added_to_box }}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="seo_txt">
+            <div class="title">{{ Seo.get('h1') }}</div>
+            <div class="txt">
+            {{ Seo.get('text')|raw  }}
+            </div>
+        </div>
+    </div>
+
+
+</section>

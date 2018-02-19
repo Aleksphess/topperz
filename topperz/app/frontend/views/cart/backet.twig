@@ -1,0 +1,75 @@
+
+<section class="basket_page">
+    <div class="container">
+        <div class="head_section">
+            {#Корзина#}{{ this.params.baccket }}
+        </div>
+
+
+        <div class="scroll_box">
+            <div class="basket_box">
+                <div class="head_basket">
+                    <ul class="head_basket_list">
+                        <li class="item">{#Товар#}{{ this.params.tovar }}</li>
+                        <li class="item">{#Вес#}{{ this.params.weight }}</li>
+                        <li class="item">{#Цена#}{{ this.params.pricee }}</li>
+                        <li class="item">{#Количество#}{{ this.params.countt }}</li>
+                        <li class="item">{#Сумма#}{{ this.params.all_price }}</li>
+                        <li class="item"> </li>
+                    </ul>
+                </div>
+                <div class="content_basket">
+                    <div class="content_personal_account">
+                {% for param in params %}
+
+                <div class="item_basket js-remove-from-backet-{{ param.id }}">
+                    <ul class="item_basket_list">
+                        <li class="item">
+                            <a href="{{ param.url }}" class="link_item">
+                            <span class="img">
+                                <img src="{{ param.simg }}" alt="">
+                            </span>
+                                <span class="txt">{{ param.title }}</span>
+                            </a>
+                        </li>
+                        <li class="item">{{ param.weight }} г</li>
+                        <li class="item">{{ param.price }} {{ this.params.grn }}</li>
+                        <li class="item">
+                            <div class="b-product__qty">
+                                <span  data-id="{{ param.id }}" class="js-qty-minus js-change-count">-</span>
+                                <input type="text" name="count" data-price="800" class="js-qty-input js-count-requst-{{ param.id }}" value="{{ param.count_order }}" disabled>
+                                <span data-id="{{ param.id }}" class="js-qty-plus js-change-count">+</span>
+                            </div>
+                        </li>
+                        <li class="item "><span class="js-change-price-{{ param.id }}">{{ param.full_price }}</span> {{ this.params.grn }}</li>
+                        <li class="item js-delete-from-backet" data-id="{{ param.id }}">X</li>
+                    </ul>
+                </div>
+                {% endfor %}
+                    </div>
+                    </div>
+            </div>
+
+        </div>
+        <div class="buttons_group">
+
+            <div class="right_group">
+                <div class="price_all">
+                    <span class="title">{#Итого#}{{ this.params.itogo }}:</span>
+                    <span class="value">
+                        <span class="js-backet-price">{{ this.params.cost }}</span>
+                        <span>грн</span></li>
+                    </span>
+                </div>
+
+                <a href="{{ Url.toRoute('/order') }}" class="btn_checkout">{#Оформить заказ#}{{ this.params.give_order }}</a>
+
+            </div>
+            <div class="left_group">
+                <a href="{{ Url.toRoute('/category') }}" class="continue_pay">{#Продолжить покупки#}{{ this.params.go_to_shop }}</a>
+                <a href="" class="delete_all js-clear">{#Очистить#}{{ this.params.clear }}</a>
+            </div>
+        </div>
+
+    </div>
+</section>

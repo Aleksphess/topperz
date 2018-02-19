@@ -1,0 +1,60 @@
+
+<section class="basket_page">
+    <div class="container">
+
+
+
+        {% for order in orders %}
+        <div class="head_section">
+            {#Заказ#}{{ this.params.order }} № {{ order.id }}
+        </div>
+
+
+        <div class="scroll_box">
+            <div class="basket_box">
+                <div class="head_basket">
+                    <ul class="head_basket_list">
+                        <li class="item">{#Товар#}{{ this.params.tovar }}</li>
+                        <li class="item">{#Цена#}{{ this.params.pricee }}</li>
+                        <li class="item">{#Количество#}{{ this.params.countt }}</li>
+                        <li class="item">{#Сумма#}{{ this.params.all_price }}</li>
+                        <li class="item"> </li>
+                    </ul>
+                </div>
+                <div class="content_basket">
+
+            {% for item in order.items %}
+                        <div class="item_basket js-remove-from-backet-{{ item.id }}">
+                            <ul class="item_basket_list">
+                                <li class="item">
+                                    <a href="{{ item.url }}" class="link_item">
+                            <span class="img">
+{#
+                                <img src="{{ item.simg }}" alt="">
+#}
+                            </span>
+                                        <span class="txt">{{ item.name }}</span>
+                                    </a>
+                                </li>
+
+                                <li class="item">{{ item.price }} {{ this.items.grn }}</li>
+                                <li class="item">
+                                    <div class="b-product__qty">
+                                        <input type="text" name="count" data-price="800" class="js-qty-input js-count-requst-{{ item.id }}" value="{{ item.count }}" disabled>
+                                    </div>
+                                </li>
+                                <li class="item "><span class="js-change-price-{{ item.id }}">{{ item.price_full }}</span> {{ this.items.grn }}</li>
+                                <li class="item js-delete-from-backet" data-id="{{ item.id }}"></li>
+                            </ul>
+                        </div>
+            {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+
+    </div>
+</section>

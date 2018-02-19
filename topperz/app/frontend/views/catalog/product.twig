@@ -1,0 +1,219 @@
+{{ use('frontend/widgets/Logo') }}
+<div class="breadcrumbs_goods_item_page">
+    <div class="container">
+        <ul class="bread_list">
+            <li class="item">
+                <a href="{{ Url.home() }}" class="link">{{ this.params.main }}</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a href="{{ Url.toRoute('/category') }}" class="link">{{ this.params.all_menu }}</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a href="{{ product.parent.url }}" class="link">{{ product.parent.info.title }}</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a  class="link">{{ product.info.title }}</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<section class="goods_item_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 is__padding_0">
+                <div class="content">
+                    <ul class="left_bar">
+                        <li class="item {%  if this.params.current_url=='category'%} active{% endif %} ">
+                            <a href="{{ Url.toRoute('/category') }}" class="link">
+                                <div class="img_link">
+                                </div>
+                                <div class="txt_link">
+                                    Все меню
+                                </div>
+                            </a>
+                        </li>
+                        {% for category in categories %}
+                            <li class="item{%  if this.params.current_url==category.url%} active{% endif %}">
+                                <a href="{{ category.url }}" class="link">
+                                    <div class="img_link" style="background-image: url({{ category.imgpng }}">
+                                    </div>
+                                    <div class="txt_link">
+                                        {{ category.info.title }}
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                    {{ logo_widget() }}
+                </div>
+
+            </div>
+            <div class="col-md-12 col-lg-10 is__padding_right_0">
+                <div class="col-md-12 padding_left_media">
+                    <div class="col-md-5 col-lg-5 is__padding_right_0 padding_left_media">
+                        <div class="goods_item_img">
+                            <img src="{{ product.bimg }}" alt="{{ product.info.title }}">
+                        </div>
+
+                        <ul class="goods_item_size js-category-{{ product.id }}">
+                            {% for params in product.params %}
+                                <li data-price="{{  params.price }}" data-id="{{ params.id  }}" class="item {% if loop.first %}active{% endif %}">
+                                    <div class="circle_part middle js-change-price" data-price="{{ params.price }}" data-id="{{ product.id }}" >
+                                        <div class="item_value">{{ params.value }}</div>
+                                        <div class="item_txt">{{ params.info.type }}</div>
+                                    </div>
+
+                                    <div class="inline_part">
+                                        {{ params.weight }} г
+                                    </div>
+
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-7 col-lg-7 is__padding_right_0">
+                        <div class="goods_item_content">
+                            <h1 class="goods_item_name">
+                                {{ product.info.title }}
+
+                            </h1>
+
+                            <div class="goods_item_txt">
+                            {{ product.info.text|raw  }}
+                            </div>
+
+                            <div class="goods_item_ingredients">
+                                <div class="title">{#Состав#}{{ this.params.consist }}:</div>
+                                <ul class="ingredients_list">
+                                    {% for consist in product.consist %}
+                                    <li class="item_ingredient">
+                                        <img src="{{ consist.bimg }}" alt="">
+                                        <div class="txt_item">{{ consist.info.title }}</div>
+                                    </li>
+
+                                    {% endfor %}
+                                </ul>
+
+                            </div>
+
+                            <div class="goods_item_info">
+
+                                <div class="price">
+                                    {% for params in product.params %}
+                                        {% if loop.first %}
+                                            <span class="count js-count-view-{{ product.id }}">{{ params.price }}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <span class="txt">{{ this.params.grn }}</span>
+                                </div>
+
+                                <div class="b-product__qty">
+                                    <span class="js-qty-minus js-count-in-catalog" data-id="{{ product.id }}">-</span>
+                                    <input type="text" pattern="\d [1-9]" name="" data-id="{{ product.id }}" class="js-qty-input js-count-add-{{ product.id }}" value="1">
+                                    <span class="js-qty-plus js-count-in-catalog" data-id="{{ product.id }}">+</span>
+                                </div>
+
+                                <div class="but_add">
+                                    <a href="" data-id="{{ product.id }}" class="js-add-to-cart">{{ this.params.added_to_box }}</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    {% if current_products %}
+                    <div class="col-md-12 is__padding_right_0 padding_left_media">
+                        <div class="slider_goods_cart">
+                            <div class="header_slider">
+                                {#С этим пирогом берут:#}{{ this.params.with_this }}
+                            </div>
+
+                            <div class="js--bxSlider_2">
+                                {% for current_product in current_products %}
+                                <div class="bxSlider_2_item">
+                                    <div class="cart_goods_extra">
+                                        <div class="name_cart"><a href="{{ current_product.url }}">{{ current_product.info.title }}</a></div>
+                                        <div class="img_cart" style="background-image: url('{{ current_product.bimg }}')"></div>
+
+                                        <div class="info_block_1">
+                                            <ul class="size_goods js-category-{{ current_product.id }}">
+                                                {% for current_params in current_product.params %}
+                                                    <li data-price="{{  current_params.price }}" data-id="{{ current_params.id  }}" class="item {% if loop.first %}active{% endif %}">
+                                                        <div class="circle_part js-change-price" data-price="{{ current_params.price }}" data-id="{{ current_product.id }}" >
+                                                            <div class="item_value">{{ current_params.value }}</div>
+                                                            <div class="item_txt">{{ current_params.info.type }}</div>
+                                                        </div>
+
+                                                        <div class="inline_part">
+                                                            {{ current_params.weight }} г
+                                                        </div>
+
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <div class="price">
+                                                {% for current_params in current_product.params %}
+                                                    {% if loop.first %}
+                                                        <span class="count js-count-view-{{ current_product.id }}">{{ current_params.price }}</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <span class="txt">грн</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="info_block_2">
+                                            <div style="display: none" class="b-product__qty">
+
+                                                <input type="text" pattern="\d [1-9]" name="" data-id="{{ current_product.id }}" class="js-qty-input js-count-add-{{ current_product.id }}" value="1">
+
+                                            </div>
+
+                                            <div class="but_add">
+                                                <a href="{{ current_product.url }}" data-id="{{ current_product.id }}" class="">{#Перейти#}{{ this.params.go_to }}</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="slider_control_2">
+                                <div class="slider-prev_2"></div>
+                                <div class="slider-next_2"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    {% endif %}
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="seo_txt">
+            <div class="txt">
+                {{ Seo.get('text')|raw  }}
+            </div>
+        </div>
+    </div>
+
+</section>

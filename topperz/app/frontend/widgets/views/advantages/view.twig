@@ -1,0 +1,14 @@
+<section class="section section--advantages">
+    <div class="container">
+        <h2 class="section__title">{#Наши преимущества#}{{ this.params.our_advantages }}</h2>
+        <div class="section__content">
+            {% for advantage in advantages %}
+            <div class="advantage">
+                <div class="advantage__inner"><img class="advantage__icon" src="{{ advantage.img }}" alt="">
+                    <p class="advantage__text">{{ advantage.info.title }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,100 @@
+{{ use('frontend/widgets/SLinkPager') }}
+<section class="breadcrumbs_reviews_page">
+    <div class="container">
+        <ul class="bread_list">
+            <li class="item">
+                <a href="{{ Url.home() }}" class="link">{{ this.params.main }}</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a {#href="{{ Url.toRoute('/category') }}"#} class="link">{#Все меню#}{{ this.params.feedbacks }}</a>
+            </li>
+
+        </ul>
+    </div>
+
+</section>
+
+<section class="reviews_page">
+    <div class="container">
+        <h1 class="head_section">
+            {{ Seo.get('h1') }}
+        </h1>
+
+        <div class="row">
+
+            <div class="col-sm-12 col-md-5 col-md-push-7 col-lg-4 col-lg-push-8">
+                <div class="form_reviews">
+                    {% if app.user.isGuest %}
+                        <form id="js-feedback" action="" class="reviews_send">
+                            <div class="head_form">{#Оставьте ваш отзыв#}{#{{ this.params.your_feedback }}#}{#Для возможности оставлять отзывы зарегестрируйтесь и войдите#}{{ this.params.text_feedback }}</div>
+
+                            <button  data-toggle="modal" data-target="#myModal_1" type="button" class="send_msg">{{ this.params.registration }}</button>
+                            <span class="js-feedback-success"></span>
+                        </form>
+                    {% else %}
+                        <form id="js-feedback" action="" class="reviews_send">
+                            <div class="head_form">{#Оставьте ваш отзыв#}{{ this.params.your_feedback }}</div>
+                            <div class="user_rating" data-star="5">
+                                <div class="head">{#Ваша оценка#}{{ this.params.your_mark }}:</div>
+                                <div class="rating_value"></div>
+                            </div>
+
+                            <input name="name" type="text" class="name" placeholder="{#Ваше имя#}{{ this.params.your_name }}" required>
+                            <input name="email" type="email" class="name" placeholder="{#Ваше имя#}email" required>
+                            <textarea name="text" type="text" class="msg_reviews" placeholder="{#Текст отзыва#}{{ this.params.your_messages }}" required></textarea>
+                            {#<div class="img">
+                                <img src="/img/reviews_3.png" alt="">
+                            </div>#}
+
+                            <button type="submit" class="send_msg">{{ this.params.send_feedback }}</button>
+                            <span class="js-feedback-success"></span>
+                        </form>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-7 col-md-pull-5 col-lg-8 col-lg-pull-4">
+                {% for feedback in feedbacks %}
+                <div class="reviews_item_box">
+                    <div class="reviews_item">
+                        <div class="name_date">
+                            <span class="name">{{ feedback.name }}</span>
+                            <span class="date">{{ feedback.creation_time|date }}</span>
+                        </div>
+                        <div class="rating" data-count="{{ feedback.mark }}"></div>
+                        <div class="txt">{{ feedback.text }} </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <div class="pagination_block">
+
+                {{ s_link_pager_widget({
+                    'pagination' : pages,
+                    'maxButtonCount' : 5,
+                    'options' : {
+                        'class' : 'pagination_list',
+                    },
+                    'linkOptions' : {
+                        'class' : 'list_item',
+                    },
+                }) }}
+
+
+
+        </div>
+        <div class="seo_txt">
+            <div class="txt">
+                {{ Seo.get('text')|raw  }}
+            </div>
+        </div>
+
+    </div>
+</section>

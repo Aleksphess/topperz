@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title> </title>
+    <meta name="description" content="">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#0f0f0f">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#0f0f0f">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#0f0f0f">
+
+</head>
+
+<body>
+<!-- HEADER -->
+<header class="header" id="header">
+
+    <!-- Header TOP -->
+    <div class="header__top">
+        <div class="container">
+
+            <div class="col-xs-4 col-sm-4 col-md-5 header__top-left">
+                <!-- phones -->
+                <div class="header__call_back">
+                    <span class="phone_number"><span class="code">(044)</span>299-99-92</span>
+                    <a href="" class="btn_call_back">перезвоните мне</a>
+                    <div class="time_job">
+                        <img src="img/header/clock.png" alt="">
+                        ежедневно - с 9:00 до 22:00</div>
+                </div>
+                <!-- /phones -->
+
+
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-2 header__top-center">
+                <img src="img/header/logo.png" alt="">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-5 header__top-right">
+
+                <div class="header__login">
+                    <img src="img/header/login.png">
+                    <span class="">Войти/Регистрация</span>
+                </div>
+
+                <div class="header__lang">
+                    <div class="b-lang">
+                        <div class="b-lang__current"><span>Рус</span></div>
+                        <ul class="b-lang__list">
+                            <li class="b-lang__item"><a href="">Eng</a></li>
+                            <li class="b-lang__item"><a href="">Укр</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="header__basket">
+                    <span><img src="img/header/basket.png" alt=""></span>
+                    <div class="basket_info">
+                        <div class="title">Ваш заказ</div>
+                        <div class="price">1290 <span>грн</span></div>
+                        <div class="count">2 товара</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /Header TOP -->
+
+    <!-- Header BOTTOM -->
+    <div class="header__bottom">
+        <div class="container">
+
+
+                <nav class="nav__menu">
+
+                    <ul class="b-info-menu posit_left">
+                        <li class="b-info-menu__item">
+                            <a href="" class="b-info-menu__link">Меню</a>
+                        </li>
+                        <li class="b-info-menu__item">
+                            <a href="" class="b-info-menu__link active">Акции</a>
+                        </li>
+                        <li class="b-info-menu__item">
+                            <a href="" class="b-info-menu__link">Доставка</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="b-info-menu posit_right">
+
+                        <li class="b-info-menu__item">
+                            <a href="" class="b-info-menu__link">О нас</a>
+                        </li>
+                        <li class="b-info-menu__item">
+                            <a href="" class="b-info-menu__link">отзывы</a>
+                        </li>
+                        <li class="b-info-menu__item">
+                            <a href="" class="b-info-menu__link">Контакты</a>
+                        </li>
+                    </ul>
+                </nav>
+        </div>
+    </div>
+    <!-- /Header BOTTOM -->
+
+</header>
+<div class="b-mobile-nav js-mobile-nav">
+    <div class="js-nav-toggle b-mobile-nav__toggle"><span class="icon-nav">toggle menu</span></div>
+    <div class="b-mobile-nav__heading">
+        <a href="" class="">Главная</a>
+    </div>
+    <div class="b-mobile-nav_wrapper js-scrollPane">
+        <ul class="b-mobile-nav__list">
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Меню</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Акции</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Доставка</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">О нас</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Отзывы</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Контакты</a>
+            </li>
+
+
+
+        </ul>
+
+        <ul class="b-mobile-nav__list">
+            <li class="b-mobile-nav__item js-accordion__item">
+                <span class="b-mobile-nav__link b-mobile-nav__link_accordion js-accordion__trigger">Ru</span>
+                <ul class="b-mobile-subnav js-accordion__content">
+                    <li class="b-mobile-nav__item">
+                        <a href="" class="b-mobile-nav__link">En</a>
+                    </li>
+                    <li class="b-mobile-nav__item">
+                        <a href="" class="b-mobile-nav__link">Ukr</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link" data-modal="login">Личный кабинет</a>
+            </li>
+        </ul>
+
+        <ul class="b-mobile-nav__list menu">
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Все меню</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Сытные пироги</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Сладкие пироги</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Постные пироги</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Три пирога</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Соусы к пирогам</a>
+            </li>
+
+            <li class="b-mobile-nav__item">
+                <a href="" class="b-mobile-nav__link">Напитки</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /HEADER -->
+
+<section class="breadcrumbs_payment_page">
+    <div class="container">
+        <ul class="bread_list">
+            <li class="item">
+                <a href="" class="link">Главная</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a href="" class="link">Все меню</a>
+            </li>
+        
+        </ul>
+    </div>
+
+</section>
+
+<section class="payment_page">
+    <div class="container">
+        <div class="head_section">
+            Оплата
+        </div>
+
+        <div class="payment_box">
+            <ul class="list_payment_type">
+                <li class="item">
+                    <div class="img">
+                        <img src="img/payment_1.png" alt="">
+                    </div>
+                    <div class="txt">Наличыми курьеру</div>
+                </li>
+
+                <li class="item">
+                    <div class="img">
+                        <img src="img/payment_2.png" alt="">
+                    </div>
+                    <div class="txt">Банковской картой (Visa/Mastercard)</div>
+                </li>
+
+                <li class="item">
+                    <div class="img">
+                        <img src="img/payment_3.png" alt="">
+                    </div>
+                    <div class="txt">счет-фактура (для конрпоративных клиентов)</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bonus_box">
+            <div class="head_box">
+                Бонусная система
+            </div>
+
+            <div class="txt">
+                Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе.
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+       <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
+               <div class="block-1">
+                   <img src="img/header/logo.png" alt="">
+                   <div class="txt_block-1">Пекарня осетинских пирогов "ИРОН-КАБИС" - единственная в Киеве, где пекут настоящие осетинские пироги с пылу, с жару в дровяной печи.</div>
+               </div>
+
+           </div>
+           <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5">
+               <div class="block-2">
+                   <div class="title_block">Меню</div>
+
+                   <ul class="menu_list_1">
+                       <li class="item"><a href="">Осетинские пироги</a></li>
+                       <li class="item"><a href="">Сладкие пироги</a></li>
+                       <li class="item"><a href="">Постные пироги</a></li>
+                       <li class="item"><a href="">Скифо-Сарматские пироги</a></li>
+                       <li class="item"><a href="">Сладости</a></li>
+                   </ul>
+                   <ul class="menu_list_2">
+                       <li class="item"><a href="">Соусы</a></li>
+                       <li class="item"><a href="">Три ребра</a></li>
+                       <li class="item"><a href="">НапиткиАКЦИИ</a></li>
+                       <li class="item"><a href="">ДОСТАВКА</a></li>
+                       <li class="item"><a href="">ОТЗЫВЫ</a></li>
+                   </ul>
+               </div>
+           </div>
+           <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+               <div class="block-3">
+                   <div class="title_block">Контакты</div>
+                   <div class="address">Киев,  Верхний Вал, 66</div>
+                   <div class="phone">
+                       <span class="title">Телефон:</span>
+                       <span class="value">(044) 444 55 66</span>
+                   </div>
+                   <div class="phone">
+                       <span class="title">Телефон:</span>
+                       <span class="value">(044) 555 66 77</span>
+                   </div>
+                   <div class="email">
+                       <span class="title">Email:</span>
+                       <span class="value">mail@mail.com</span>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </div>
+    <div class="bottom_block">
+        <div class="container">
+            <div class="">
+                <div class="left_block">
+                    ПЕКАРНЯ «ИРОН — КАБИС»
+                </div>
+                <div class="right_block">
+                    <ul class="soc_list">
+
+                        <li class="item">
+                            <a href="" class="link_item ">
+                                <i class="fab fa-vk"></i>
+                            </a>
+                        </li>
+
+                        <li class="item">
+                            <a href="" class="link_item ">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+
+                        <li class="item">
+                            <a href="" class="link_item ">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+
+                        <li class="item">
+                            <a href="" class="link_item ">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </li>
+
+                        <li class="item">
+                            <a href="" class="link_item ">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<!-- /FOOTER -->
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">×</button>
+                Обратный звонок
+            </div>
+
+            <div class="modal-body">
+                <form id="fast_registration" class="call_back">
+
+                    <input type="text" id="name_callback" class="name_callback" required placeholder="Ваше имя"/>
+
+                    <input type="text" id="phone_callback" class="phone_callback" required placeholder="Телефон"/>
+
+                    <button type="submit" class="btn_send">Отправить</button>
+
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div id="myModal_ok" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+                <div class="modal-title">Отправка даных</div>
+            </div>
+
+            <div class="modal-body">Ваши даные успешно отправлены!</div>
+            <div class="modal_ok_effect"><img src="images/modal_ok.png" alt="ok"></div>
+            <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button></div>
+        </div>
+    </div>
+</div>
+
+<script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+<script src="js/main.js"></script>
+
+
+
+</body>
+</html>

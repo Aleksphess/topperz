@@ -1,0 +1,36 @@
+
+
+<section class="ordering_page">
+    <div class="container">
+        <div class="head_section">
+           {# Оставьте свой вопрос#}{{ this.params.request_question }}
+        </div>
+
+        <div class="form_box">
+
+            <form action="" id="js-question" class="ordering_form">
+
+                <div class="item_form">
+                    <div class="small_head">{#Контактная информация#}{{ this.params.contact_info }}</div>
+
+                    <input type="text" class="txt_input name js-name"  id="name" name="name" placeholder="{{ this.params.your_name }}" {% if not(app.user.isGuest) %}value="{{ app.user.identity.username }}{% endif %}">
+                    <input type="tel" class="txt_input phone js-phone" id="tel" name="phone" placeholder="{{ this.params.phone }}" {% if not(app.user.isGuest) %}value="{{ app.user.identity.phone }}{% endif %}">
+
+                </div>
+
+
+                <div class="item_form">
+                    <div class="small_head">{{ this.params.question }}</div>
+
+                    <textarea name="comment" type="text" class="comment js-comment" id="comment" name="comment" placeholder="{{ this.params.question }}"></textarea>
+                </div>
+                <div class="buttons_group">
+
+                    <div class="right_group">
+                <button  type="submit" class="btn_checkout">{#Задать вопрос#}{{ this.params.send }}</button>
+                    </div>
+                </div>
+            </form>
+
+
+</section>

@@ -1,0 +1,128 @@
+{{ use('frontend/widgets/SLinkPager') }}
+{{ use('frontend/widgets/Logo') }}
+<section class="breadcrumbs_catalog_page">
+    <div class="container is__padding_0">
+        <ul class="bread_list">
+            <li class="item">
+                <a href="{{ Url.home() }}" class="link">{{ this.params.main }}</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a href="{{ Url.toRoute('/category') }}" class="link">{{ this.params.all_menu }}</a>
+            </li>
+            {% if category %}
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a {#href="{{ category.url }}"#} class="link">{{ category.info.title }}</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </div>
+
+</section>
+
+<section class="catalog_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-2 is__padding_0">
+                <div class="content">
+                    <ul class="left_bar">
+                        <li class="item {%  if this.params.current_url=='category'%} active{% endif %} ">
+                            <a href="{{ Url.toRoute('/category') }}" class="link">
+                                <div class="img_link">
+                                </div>
+                                <div class="txt_link">
+                                    {{ this.params.all_menu }}
+                                </div>
+                            </a>
+                        </li>
+                        {% for category in categories %}
+                        <li class="item{%  if this.params.current_url==category.url%} active{% endif %}">
+                            <a href="{{ category.url }}" class="link">
+                                <div class="img_link" style="background-image: url({{ category.imgpng }}">
+                                </div>
+                                <div class="txt_link">
+                                    {{ category.info.title }}
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                   {{ logo_widget() }}
+                </div>
+
+            </div>
+            <div class="col-md-12 col-lg-10 is__padding_right_0">
+                {% for product in products %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 is__padding_0">
+                        <div class="cart_goods_small">
+                            <div class="name_cart"><a href="{{ product.url }}">{{ product.info.title }}</a></div>
+                            <a href="{{ product.url }}"><div class="img_cart" style="background-image: url('{{ product.bimg }}')"></div></a>
+                            <ul class="size_goods js-category-{{ product.id }}">
+                                {% for params in product.params %}
+                                    <li data-price="{{  params.price }}" data-id="{{ params.id  }}" class="item {% if loop.first %}active{% endif %}">
+                                        <div class="circle_part js-change-price" data-price="{{ params.price }}" data-id="{{ product.id }}" >
+                                            <div class="item_value">{{ params.value }}</div>
+                                            <div class="item_txt">{{ params.info.type }}</div>
+                                        </div>
+
+                                        <div class="inline_part">
+                                            {{ params.weight }} г
+                                        </div>
+
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                            <div class="price">
+                                {% for params in product.params %}
+                                    {% if loop.first %}
+                                        <span class="count js-count-view-{{ product.id }}">{{ params.price }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="txt">{{ this.params.grn }}</span>
+                            </div>
+
+                            <div class="b-product__qty">
+                                <span class="js-qty-minus js-count-in-catalog" data-id="{{ product.id }}">-</span>
+                                <input type="text" pattern="\d [1-9]" name="" data-id="{{ product.id }}" class="js-qty-input js-count-add-{{ product.id }}" value="1">
+                                <span class="js-qty-plus js-count-in-catalog" data-id="{{ product.id }}">+</span>
+                            </div>
+
+                            <div class="but_add">
+                                <a href="" data-id="{{ product.id }}" class="js-add-to-cart">{#Добавить в  коробку#}{{ this.params.added_to_box }}</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="pagination_my">
+            {{ s_link_pager_widget({
+                'pagination' : pages,
+                'maxButtonCount' : 5,
+                'options' : {
+                    'class' : 'pagination_list',
+                },
+                'linkOptions' : {
+                    'class' : 'list_item',
+                },
+            }) }}
+        </div>
+
+        <div class="seo_txt">
+            <h1 class="title">{{ Seo.get('h1') }}</h1>
+            <div class="txt">
+                {{ Seo.get('text')|raw  }}
+            </div>
+        </div>
+    </div>
+
+
+</section>

@@ -1,0 +1,15 @@
+{% macro menu_links(url, info, name, current_url, icon) %}
+    <a {% if not (url == current_url) %} href="{{ url }}" {% endif %} class="cabinet__link {% if url == current_url %} cabinet__link_active {% endif %}">
+        <span class="cabLink__info {% if icon %} cabLink__info_icon {% endif %}">{{ info | raw }}</span>
+        <span class="cabLink__text">{{ name }}</span>
+    </a>
+{% endmacro %}
+
+<aside class="cabinet_aside">
+    <h4><a href="{{ Url.to('/user/index') }}" >Личный кабинет {{ app.user.identity.username }}</a></h4>
+	{% if current_user==1 %}
+    {{ _self.menu_links(Url.to('/user/index'), lots_count, "Мои франшизы", current_url, false) }}
+	{% endif %}
+    {{ _self.menu_links(Url.to('/user/settings'), '<span class="glyphicon glyphicon-cog"></span>', "Настройки профиля", current_url, true) }}    
+    {{ _self.menu_links(Url.to('/logout'), '!', "Выйти из системы", current_url, false) }}    
+</aside>

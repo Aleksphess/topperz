@@ -1,0 +1,100 @@
+
+<section class="personal_account_page">
+    <div class="container">
+        <div class="account_box">
+            <div class="nav">
+                <ul class="list_menu">
+                    <li class="item active">
+                        <div class="icon"><i class="fas fa-user"></i></div>
+                        <a href="" class="link">{#Личные данные#}{{ this.params.your_data }}</a>
+                    </li>
+
+                    <li class="item">
+                        <div class="icon"><i class="fas fa-list"></i></div>
+                        <a href="{{ Url.toRoute('/user/orders') }}" class="link">{#История заказов#}{{ this.params.history_orders }}</a>
+                    </li>
+
+                    <li class="item">
+                        <div class="icon"><i class="fas fa-question-circle"></i></div>
+                        <a href="{{ Url.toRoute('/user/question') }}" class="link">{#Задать вопрос#}{{ this.params.question }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content_personal_account">
+                <div class="head">{#Добро пожаловать#}{{ this.params.welcome }}, <span>{{ app.user.identity.username }}</span></div>
+                <div class="form_box">
+                    <form action="" id="change-settings" class="form_order">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="full_name">{#ФИО#}{{ this.params.fio }}:</label>
+                                <input type="text" name="username" class="full_name" id="username" placeholder="{{ this.params.insert_name }}" value="{{ app.user.identity.username }}">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="phone">{{ this.params.phone }}</label>
+                                <input type="tel" name="phone" class="phone" id="phone" placeholder="+38 (067) 562 11 22" value="{{ app.user.identity.phone }}">
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label for="email">E-mail</label>
+                                <input type="email" name="email" class="email" id="email" placeholder="IvanovInav@gmail.com" value="{{ app.user.identity.email }}">
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="password">{#Парол#}{{ this.params.password }}</label>
+                                <input type="password" name="password" class="password" id="password" value="wefwefewfwef">
+                                <button class="btn_password js-change-password">Изменить</button>
+                                <span class="js-password-change" ></span>
+                            </div>
+                            {%  if not(app.user.identity.address) %}
+                            <div class="col-md-12">
+                                <div class="js-render"></div>
+                            </div>
+                            {% endif %}
+                            {%  if app.user.identity.address %}
+                            <div class="col-md-12">
+                                <label for="address">{#Адрес доставки#}{{ this.params.delivery_address }}:</label>
+                                {% for address in app.user.identity.address %}
+                                <input type="text" name="address" class="address js-none-{{ address.id }} js-change-{{ address.id }}"  placeholder="адрес доставки" value="{{ address.address }}">
+                                    <button data-id="{{ address.id }}" class=" btn_address_delete js-none-{{ address.id }} js-delete-address">×</button><span class="js-success-change-{{ address.id }}"></span>{#<br>#}
+
+                                    <button class="btn_address js-none-{{ address.id }} js-change-address" data-id="{{ address.id }}">{{ this.params.change }}</button>
+                                {% endfor %}
+                                <div class="js-render"></div>
+                            </div>
+                            {% endif %}
+
+
+                            <div class="col-md-12">
+                                <label for="address">{#Добавить#}{{ this.params.addd }} {{ this.params.delivery_address }}</label>
+                                <input type="text" name="address" class="address" id="address" placeholder="адрес доставки">
+                                <button class="btn_address js-delivery-add">{#Добавить#}{{ this.params.added }}</button>
+                                <span class="js-delivery-add-success"></span>
+                            </div>
+
+                            <div class="col-sm-6 col-md-6">
+                                <label for="social_network">{#Соц. сети#}{{ this.params.socials }}</label>
+                                <input type="text" id="vk" name="vk" class="social_network vk" placeholder="vk.com/IvanovInav"  value="{{ app.user.identity.vk }}" >
+                            </div>
+
+                            <div class="col-sm-6 col-md-6">
+                                <input type="text" id="facebook" name="facebook" class="social_network fb" placeholder="аи.com/IvanovInav"  value="{{ app.user.identity.facebook }}">
+                            </div>
+
+                            <div class="col-sm-12 col-md-12">
+                                <button type="submit" class="btn_save_changes"{#Сохранить изменения#}{{ this.params.save_changes }}</button>
+                                <span class="js-success" ></span>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>

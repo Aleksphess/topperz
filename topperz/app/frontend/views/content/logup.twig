@@ -1,0 +1,53 @@
+
+<section class="personal_account_page">
+    <div class="container">
+        <div class="account_box">
+
+            <div class="content_personal_account">
+                <div class="head">{#Регистрация#}{{ this.params.registration }}</div>
+                <div class="form_box">
+                    <form action="" id="sign-up" class="form_order">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="full_name">{{ this.params.fio }}:</label>
+                                <input type="text" name="username" class="full_name" id="username" placeholder="{{ this.params.your_name }}">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="phone">{#Номер телефона#}{{ this.params.phone }}</label>
+                                <input type="tel" name="phone" class="phone" id="phone" placeholder="+38 (067) 562 11 22">
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label for="email">E-mail</label>
+                                <input type="email" name="email" class="email" id="email" placeholder="IvanovInav@gmail.com">
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="password">{{ this.params.password }}</label>
+                                <input type="password" name="password" class="full_name" id="password" placeholder="wefwefewfwef">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password">{{ this.params.password }}</label>
+                                <input type="password" name="password_repick" class="full_name" id="password" placeholder="wefwefewfwef">
+                            </div>
+
+
+
+                            <div class="col-sm-12 col-md-12">
+                                <button type="submit" class="btn_save_changes js-registration">{#Зарегестрироваться#}{{ this.params.regictration }}</button>
+                                <span class="js-registration-answer"></span>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>

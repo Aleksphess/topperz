@@ -1,0 +1,11 @@
+<ul class="b-mobile-nav__list">
+    {% for item in menu %}
+    <li class="b-mobile-nav__item">
+        <a href="{{ item.url }}" class="b-mobile-nav__link">{{ item.info.title }}</a>
+    </li>
+    {% endfor %}
+
+
+
+
+</ul>

@@ -1,0 +1,11 @@
+{"web":{
+    "client_id":"174437080771-j43nfu8ul07qna82brvh95g3mekggevi.apps.googleusercontent.com",
+    "project_id":"test11-163711",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "token_uri":"https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret":"mEhZA0aGCbsmCnLTwAFb7yhf",
+    "redirect_uris":["http://test11.digitalforce.ua/auth/login"],
+    "javascript_origins":["http://test11.digitalforce.ua"]
+    }
+}

@@ -1,0 +1,42 @@
+<div class="breadcrumbs_contacts_page">
+    <div class="container">
+        <ul class="bread_list">
+            <li class="item">
+                <a href="{{ Url.home() }}" class="link">{{ this.params.main }}</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a href="{{ Url.toRoute('/discounts') }}" class="link">{{ this.params.discounts }}</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a {#href="{{ discount.url }}"#} class="link">{{ discount.info.title }}</a>
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+
+<div class="delivery_page">
+    <div class="container">
+        <h1 class="head_section">
+            {{ discount.info.title }}
+        </h1>
+
+        {{ discount.info.text|raw }}
+        <div class="seo_txt">
+            
+            <div class="txt">
+                {{ Seo.get('text')|raw  }}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

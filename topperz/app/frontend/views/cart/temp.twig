@@ -1,0 +1,174 @@
+
+<section class="breadcrumbs_ordering_page">
+    <div class="container">
+        <ul class="bread_list">
+            <li class="item">
+                <a href="" class="link">Главная</a>
+            </li>
+            <li class="item">
+                <span> / </span>
+            </li>
+            <li class="item">
+                <a href="" class="link">Все меню</a>
+            </li>
+
+        </ul>
+    </div>
+
+</section>
+
+<section class="ordering_page">
+    <div class="container">
+        <div class="head_section">
+            Оформления заказа
+        </div>
+
+        <div class="form_box">
+
+            <form action="" class="ordering_form">
+
+                <div class="item_form">
+                    <div class="small_head">Контактная информация</div>
+
+                    <input type="text" class="txt_input name" placeholder="Ваше имя">
+                    <input type="tel" class="txt_input phone" placeholder="Ваш номер телефона">
+                    <input type="email" class="txt_input email" placeholder="Ваш e-mail">
+                    <input type="text" class="txt_input address" placeholder="Адрес доставки">
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">Способ оплаты</div>
+
+                    <label class="custom_label cl_1">
+                        <input name="radio_payment" type="radio" checked />
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">Наличыми курьеру</span>
+                        </div>
+
+                    </label>
+
+                    <label class="custom_label cl_2">
+                        <input name="radio_payment" type="radio" />
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">Банковской картой (Visa/Mastercard)</span>
+                        </div>
+                    </label>
+
+                    <label class="custom_label cl_3">
+                        <input name="radio_payment" type="radio" />
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">счет-фактура (для конрпоративных клиентов)</span>
+                        </div>
+                    </label>
+
+
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">Способ доставки</div>
+
+                    <label class="custom_label cl_4">
+                        <input name="radio_delivery" type="radio" checked />
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">Курьером</span>
+                        </div>
+                    </label>
+
+                    <label class="custom_label cl_5">
+                        <input name="radio_delivery" type="radio" />
+                        <div class="my_input">
+                            <span class="check"></span>
+                            <span class="img_check"></span>
+                            <span class="txt_check">Самовывоз c магазина</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">Комментарий к заказу</div>
+
+                    <textarea name="comment" type="text" class="comment" placeholder="Введите ваши пожелания"></textarea>
+                </div>
+
+                <div class="item_form">
+                    <div class="small_head">Информация о заказе</div>
+
+                    <div class="scroll_box">
+                        <div class="basket_box">
+                            <div class="head_basket">
+                                <ul class="head_basket_list">
+                                    <li class="item">{#Товар#}{{ this.params.tovar }}</li>
+                                    <li class="item">{#Вес#}{{ this.params.weight }}</li>
+                                    <li class="item">{#Цена#}{{ this.params.pricee }}</li>
+                                    <li class="item">{#Количество#}{{ this.params.countt }}</li>
+                                    <li class="item">{#Сумма#}{{ this.params.all_price }}</li>
+                                    <li class="item"> </li>
+                                </ul>
+                            </div>
+                            <div class="content_basket">
+                                {% for param in params %}
+
+                                    <div class="item_basket js-remove-from-backet-{{ param.id }}">
+                                        <ul class="item_basket_list">
+                                            <li class="item">
+                                                <a href="{{ param.url }}" class="link_item">
+                            <span class="img">
+                                <img src="{{ param.simg }}" alt="">
+                            </span>
+                                                    <span class="txt">{{ param.title }}</span>
+                                                </a>
+                                            </li>
+                                            <li class="item">{{ param.weight }} г</li>
+                                            <li class="item">{{ param.price }} {{ this.params.grn }}</li>
+                                            <li class="item">
+                                                <div class="b-product__qty">
+
+                                                    <input type="text" name="count" data-price="800" class="js-qty-input js-count-requst-{{ param.id }}" value="{{ param.count_order }}" disabled>
+
+                                                </div>
+                                            </li>
+                                            <li class="item "><span class="js-change-price-{{ param.id }}">{{ param.full_price }}</span> {{ this.params.grn }}</li>
+                                            <li class="item js-delete-from-backet" data-id="{{ param.id }}">X</li>
+                                        </ul>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="buttons_group">
+
+                        <div class="right_group">
+                            <div class="price_all">
+                                <span class="title">Итого:</span>
+                                <span class="value">
+                        <span class="">{{ this.params.cost }}</span>
+                        <span>грн</span></li>
+                    </span>
+                            </div>
+
+                            <a href="" class="btn_checkout js-order-request">Оформить заказ</a>
+
+                        </div>
+                        <div class="left_group">
+                            <div><span>Товаров на: </span><span>{{ this.params.cost }}</span><span>грн</span></div>
+                            <div><span>Стоимость доставки: </span><span>50</span><span>грн</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</section>

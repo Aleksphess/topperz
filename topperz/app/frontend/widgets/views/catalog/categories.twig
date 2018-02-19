@@ -1,0 +1,10 @@
+<ul class="b-mobile-nav__list menu">
+    <li class="b-mobile-nav__item">
+        <a href="{{ Url.toRoute('/category') }}" class="b-mobile-nav__link">{{ this.params.all_menu }}</a>
+    </li>
+    {% for category in categories %}
+    <li class="b-mobile-nav__item">
+        <a href="{{ category.url }}" class="b-mobile-nav__link">{{ category.info.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
