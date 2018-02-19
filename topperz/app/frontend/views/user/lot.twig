@@ -1,0 +1,86 @@
+{{ use('frontend/widgets/NewsWidget') }}
+{{ use('frontend/widgets/Advantages') }}
+{{ use('frontend/widgets/User') }}
+<section class="section section--profile">
+    <div class="container">
+        {{ user_widget() }}
+
+    </div>
+    <section class="section section--functions">
+        <div class="container">
+            <div class="row">
+                <div class="col col--4-of-12 col--s-12-of-12 col--m-4-of-12 col--l-4-of-12">
+                    <article class="function">
+                        <div class="function__inner">
+                            <div class="function__icon"><img src="/images/functions/alarm.png" alt=""></div>
+                            <h3 class="function__title">РАЗМЕЩЕНИЕ</h3>
+                            <div class="function__text">Размещение вашей франшизы закончится <strong>{{ app.user.identity.date_active }}. </strong>Чтобы франшизы оставались в каталоге, необходимо <a href="{{ Url.to('/user/payment') }}">продлить размещение.</a></div>
+                        </div>
+                    </article>
+                </div>
+                {#<div class="col col--4-of-12 col--s-12-of-12 col--m-4-of-12 col--l-4-of-12">
+                    <article class="function">
+                        <div class="function__inner">
+                            <div class="function__icon"><img src="/images/functions/wallet.png" alt=""></div>
+                            <h3 class="function__title">БАЛАНС</h3>
+                            <div class="function__text">На вашем счету <strong>$0.</strong>После пополнения баланса вы можете поднять популярность своей франшизы. <a href="">Пополнить баланс</a></div>
+                        </div>
+                    </article>
+                </div>#}
+                <div class="col col--4-of-12 col--s-12-of-12 col--m-4-of-12 col--l-4-of-12">
+                    <article class="function">
+                        <div class="function__inner">
+                            <div class="function__icon"><img src="/images/functions/message.png" alt=""></div>
+                            <h3 class="function__title">СООБЩЕНИЯ</h3>
+                            <div class="function__text">У вас <strong>нет непрочитанных сообщений. </strong>Можете написать кому-нибудь <a href="{{ Url.to('/dialog/index') }}">комментарий о франшизе.</a></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <h1 class="section__title is--align-left">Моя франшиза</h1>
+        <div class="section__content">
+            <div class="franchise-info">
+                <div class="franchise-info__inner">
+                    <div class="franchise-info__view">
+                        <article class="franch">
+                            <div class="franch__inner">
+                                <div class="franch__photo"><img src="{{ lot.bimg }}" alt=""></div>
+                                <div class="franch__details">
+                                    <div class="franch__brands"><img src="{{ lot.minilogo }}" alt=""></div>
+                                    <h3 class="franch__title"> <a href="{{ lot.url }}">{{ lot.name }}</a></h3>
+                                    <div class="franch__row">
+                                        <div class="franch__investments"><i class="icon-money"></i><span><span>Инвестиции</span>{{ lot.invest_min }} {{ lot.currencyValue }}.</span></div>
+                                        <div class="franch__payback"><i class="icon-calendar"></i><span><span>Окупаемость</span>{{ lot.occupation_min }}</span></div>
+                                    </div>
+                                    <div class="franch__row">
+                                        <div class="franch__views"><i class="icon-view"></i>{{ lot.views_count }} просмотров</div>
+                                        <div class="franch__action"><a class="btn" href="{{ lot.url }}">Посмотреть</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="franchise-info__details">
+                        <h2 class="franchise-info__title">{{ lot.name }}</h2>
+                        <ul class="franchise-info__properties">
+                            <li class="franchise-info__properties-item"> <span>Размещение франшизы до </span><strong>{{ app.user.identity.date_active }}</strong><a href="{{ Url.to('/user/payment') }}">Продлить франшизу</a></li>
+                           {# <li class="franchise-info__properties-item"> <span>Популярность франшизы: </span><strong>2582 (№5)</strong><a href="">Поднять популярность</a></li>#}
+                            <li class="franchise-info__properties-item"> <span>Просмотры франшизы: </span><strong>{{ lot.views_count }}</strong>{#<a href="">Статистика франшизы</a>#}</li>
+{#
+                            <li class="franchise-info__properties-item"> <span>Комментарии о франшизе: </span><strong>191</strong><a href="">Все комментарии</a></li>
+#}
+                        </ul>
+                        <div class="franchise-info__action"><a class="btn btn--primary" href="{{ Url.to('/user/edit/lot/') }}{{ lot.alias }}">Редактировать франшизу</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="section__divider">
+        <div class="section__action"><a class="btn btn--primary btn--lg" href="{{ Url.to('/user/create/lot') }}">Добавить франшизу</a></div>
+    </div>
+</section>
+{{ advantages_widget() }}
+{{ news_widget_widget() }}

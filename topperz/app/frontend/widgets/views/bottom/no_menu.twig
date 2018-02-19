@@ -1,0 +1,11 @@
+<div class="col col--3-of-12 col--s-12-of-12 col--m-3-of-12 col--l-3-of-12">
+    <nav class="menu">
+        <h3 class="menu__title">Доставка</h3>
+        <ul class="menu__list">
+            {% for item in menu %}
+            <li class="menu__item"><a class="menu__link" href="{{ item.url }}">{{ item.info.title }}</a></li>
+            {% endfor %}
+            
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,83 @@
+{{ use('frontend/widgets/CabinetMenu') }}
+
+<section class="section_settings">
+    <div class="container">
+        <header class="section__header section__header_catalog">
+            <h2>Настройки</h2>
+        </header>
+        <div class="row">
+            <div class="col-lg-3 col-lg-push-9 col-md-3 col-md-push-9 col-sm-4 col-sm-push-8 col-xs-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{ cabinet_menu_widget() }}
+                    </div>
+                    <div class="col-sm-12 hidden-xs">
+                        <img src="/img/banner2.jpg" alt="" class="img-responsive bananer">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-lg-pull-3 col-md-9 col-md-pull-3 col-sm-8 col-sm-pull-4 col-xs-12">
+                <div class="settings__forms">
+                    <div class="settings__block">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <form class="form_auth form_settings form_change_settings">
+                                    <h5>Изменить контактные данные</h5>
+                                    <label for="nameReg" class="sr-only">Имя</label>
+                                    <input type="text" class="form-control" id="nameReg" placeholder="Имя" name="username" required value="{{ user.username }}">
+                                    <label for="phoneReg" class="sr-only">Телефон</label>
+                                    <input type="text" class="form-control" id="phoneReg" placeholder="Телефон" name="phone" required value="{{ user.phone }}">
+                                    <label for="cityReg" class="sr-only">Город</label>
+                                    <input type="text" class="form-control" id="city" placeholder="Город" required="" name="city" value="{{ user.city }}">
+                                    <input type="text" class="hidden" name="city_id" id="cityId" required="">
+                                    <input type="hidden" name="user_id" value="{{ user.id }}"> 
+                                    <input type="hidden" name="{{ app.request.csrfParam }}" value="{{ app.request.csrfToken }}"> 
+{#                                    <input type="text" class="form-control" id="cityReg" placeholder="Город" name="city" required value="{{ user.city }}">#}
+                                    <button type="submit">Сохранить изменения</button>
+                                </form>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <form class="form_auth form_settings form_change_settings">
+                                    <h5>Изменить email-адрес</h5>
+                                    <label for="email" class="sr-only">E-mail</label>
+                                    <input type="email" class="form-control" id="email" placeholder="E-mail" name="email" required value="{{ user.email }}">
+                                    <label for="emailNew" class="sr-only">Новый E-mail адрес</label>
+                                    <input type="email" class="form-control" id="emailNew" placeholder="Новый E-mail адрес" name="emailNew" required>
+                                    <label for="passwordReg" class="sr-only">Пароль</label>
+                                    <input type="password" class="form-control" id="passwordReg" placeholder="Пароль" name="password" required>
+                                    <input type="hidden" name="{{ app.request.csrfParam }}" value="{{ app.request.csrfToken }}"> 
+                                    <input type="hidden" name="user_id" value="{{ user.id }}"> 
+                                    <button type="submit">Сохранить изменения</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings__block">
+                        <form action="" class="form_auth form_settings form_reminder">
+                            <h5>Уведомления</h5>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p>Ответы - сообщения о новых ответах на объявления.</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <input type="checkbox" id="reminderOnPhone" class="checkbox" name="reminderOnPhone" value="1">
+                                    <label for="reminderOnPhone">На телефон</label>
+                                    <input type="checkbox" id="reminderOnEmail" class="checkbox" name="reminderOnEmail" value="1">
+                                    <label for="reminderOnEmail">На E-mail</label>
+                                    <input type="hidden" name="{{ app.request.csrfParam }}" value="{{ app.request.csrfToken }}"> 
+                                    <input type="hidden" name="user_id" value="{{ user.id }}"> 
+                                </div>
+                            </div>
+                            <button type="submit">Сохранить изменения</button>
+                        </form>
+                    </div>
+                    <form action="" class="form_auth form_settings form_del">
+                        <input type="hidden" name="{{ app.request.csrfParam }}" value="{{ app.request.csrfToken }}"> 
+                        <input type="hidden" name="user_id" value="{{ user.id }}"> 
+                        <button type="submit">Удалить учетную запись</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

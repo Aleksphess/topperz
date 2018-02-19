@@ -1,11 +1,8 @@
-<ul class="b-mobile-nav__list">
-    {% for item in menu %}
-    <li class="b-mobile-nav__item">
-        <a href="{{ item.url }}" class="b-mobile-nav__link">{{ item.info.title }}</a>
-    </li>
-    {% endfor %}
-
-
-
-
-</ul>
+<div class="mobile-nav__block">
+    <h4 class="mobile-nav__title">Меню Доставки</h4>
+    <ul class="mobile-nav__list">
+        {% for item in menu %}
+        <li class="mobile-nav__item"><a class="mobile-nav__link" href="{{ item.url }}">{{ item.info.title }}</a></li>
+       {% endfor %}
+    </ul>
+</div>

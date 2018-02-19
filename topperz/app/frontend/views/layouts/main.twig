@@ -1,6 +1,6 @@
 {{ use('frontend/assets/AppAsset') }}
 {{ use('frontend/widgets/HeadMenu') }}
-{{ use('frontend/widgets/Catalog') }}
+{{ use('frontend/widgets/BottomMenu') }}
 {{ register_app_asset(this) }}
 {{ this.beginPage }}
 <!DOCTYPE html>
@@ -12,145 +12,109 @@
     <meta charset="{{ app.charset }}">
     {{ html.csrfMetaTags | raw }}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
     <meta name="robots" content="NOINDEX, NOFOLLOW">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>{{ html.decode(Seo.get('title')) }}</title>
     <meta name="description" content="{{ html.decode(Seo.get('description')) }}">
-    <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#0f0f0f">
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#0f0f0f">
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#0f0f0f">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;amp;subset=cyrillic" rel="stylesheet">
+
     {{  this.head  }}
 
 
 </head>
 <body>
 {{ this.beginBody }}
-<header class="header" id="header">
-
-    <!-- Header TOP -->
-    <div class="header__top">
-        <div class="container">
-
-            <div class="col-xs-4 col-sm-4 col-md-5 header__top-left">
-                <!-- phones -->
-                <div class="header__call_back">
-                    <span class="phone_number">{{ this.params.phone_header|raw }}
-                    <a href="" class="btn_call_back" data-toggle="modal" data-target="#myModal">{{ this.params.callme }}</a>
-                    <div class="time_job">
-                        <img src="/img/header/clock.png" alt="">
-                        {#ежедневно - с 9:00 до 22:00#}{{ this.params.timework }}</div>
+<header class="header">
+    <div class="header__inner container">
+        <div class="mobile-nav__toggle-wrapper">
+            <div class="js-nav-toggle mobile-nav__toggle"><span class="icon-nav">toggle menu</span></div>
+        </div>
+        <!-- MENU-->
+        <nav class="mobile-nav">
+            <div class="mobile-nav__inner">
+                <div class="mobile-nav__block is--centered">
+                    <div class="inline"><a class="mobile-nav__link" href="/registration.html">Войти</a></div>
+                    <div class="langs is--mobile"><a class="langs__item" href="">Kz</a><a class="langs__item is--current" href="">Ru</a><a class="langs__item" href="">En</a></div>
                 </div>
-                <!-- /phones -->
-
-
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-2 header__top-center">
-                <a href="{{ Url.home() }}"><img src="/img/header/logo.png" alt=""></a>
-            </div>
-            <div class="col-xs-4 col-sm-4 col-md-5 header__top-right">
-
-                <div class="header__login">
-                    <img src="/img/header/login.png">
-                    {% if app.user.isGuest %}
-                    <span class=""><span  data-toggle="modal" data-target="#myModal_2" >{#Войти#}{{ this.params.login }}</span>/<span data-toggle="modal" data-target="#myModal_1" >{#Регистрация#}{{ this.params.registration }}</span></span>
-                    {% else %}
-                        <span class=""><a href="{{ Url.toRoute('/user/index') }}">{#Профиль#}{{ this.params.profile }}</a>/<a href="{{ Url.toRoute('/logout') }}" >{#Регистрация#}{#Выйти#}{{ this.params.exit }}</a></a></span>
-                    {% endif %}
+                {{ head_menu_widget({'mobile':true}) }}
+                <div class="mobile-nav__block">
+                    <h4 class="mobile-nav__title">Личный кабинет</h4>
+                    <ul class="mobile-nav__list">
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Личные данные</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">История заказов</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Адреса</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Смена пароля</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Ваша скидка</a></li>
+                    </ul>
                 </div>
-
-                <div class="header__lang">
-
-                    <div class="b-lang">
-                        {% for l in this.params.langs %}
-                        {% if l == this.params.lang %}
-                        <div class="b-lang__current"><span>{{ l.name|slice(0,3) }}</span></div>
-                        {% endif %}
-                        {% endfor %}
-                        <ul class="b-lang__list">
-
-                            {% for l in this.params.langs %}
-                                {% if l != this.params.lang %}
-                                    <li class="b-lang__item"><a href="{{ l.langUrl  }}">{{ l.name|slice(0,3) }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
+                <div class="mobile-nav__block">
+                    <h4 class="mobile-nav__title">Информация</h4>
+                    <ul class="mobile-nav__list">
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/delivery.html">Условия доставки</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/payment.html">Оплата</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/specials.html">Акции</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="">Возврат товара</a></li>
+                    </ul>
+                </div>
+                <div class="mobile-nav__block">
+                    <h4 class="mobile-nav__title">Компания</h4>
+                    <ul class="mobile-nav__list">
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/about.html">О компании</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="">Юридический адрес</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="">Конфиденциальность</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/contacts-us.html">Свяжитесь с нами</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="header__logo"><a class="logo" href="{{ Url.home() }}"><img class="logo__img" src="/images/logo.png" alt=""><img class="logo__img--mobile" src="/images/logo-mob.png" alt=""></a></div>
+        <div class="header__contact-info">
+            <div class="contact-info">
+                <div class="contact-info__icon"><i class="icon icon-whatsapp"></i></div>
+                <div class="contact-info__content">
+                    <div class="contact-info__worktime">
+                        доставим с 10<sup>00</sup> до 03<sup>00</sup></div>
+                    <div class="contact-info__phone">
+                        +7 (701) 888 85 34<i class="contact-info__toggler icon icon-arrow-down"></i></div>
+                    <div class="contact-info__details">
+                        <div class="contact-info__phone">+7 (727) 390 20 20</div>
+                        <nav class="contact-info__schedule">
+                            <h4 class="contact-info__schedule-title">График работы:</h4>
+                            <ul class="contact-info__schedule-list">
+                                <li class="contact-info__schedule-item"><span class="contact-info__schedule-date">пн – чт:</span><span class="contact-info__schedule-time">10:00 – 03:00</span></li>
+                                <li class="contact-info__schedule-item"><span class="contact-info__schedule-date">Пт – Сб:</span><span class="contact-info__schedule-time">10:00 – 05:00</span></li>
+                                <li class="contact-info__schedule-item"><span class="contact-info__schedule-date">Вс:</span><span class="contact-info__schedule-time">11:00 – 03:00</span></li>
+                            </ul>
+                        </nav><a class="contact-info__action" href=""> <i class="icon icon-whatsapp-small"></i><span>WhatsApp</span></a>
                     </div>
                 </div>
-
-                <a href="{{ Url.toRoute('/backet') }}" class="header__basket">
-                    <span><img src="/img/header/basket.png" alt=""></span>
-                    <div class="basket_info">
-                        <div class="title">{#Ваш заказ#}{{ this.params.your_order }}</div>
-                        <div class="price"><span class="js-backet-price">{{ this.params.cost }}</span> <span>{{ this.params.grn }}</span></div>
-                        <div class="count "><span class="js-backet-count">{{ this.params.cart_count }}</span> {#товара#} {{ this.params.count_tovar }}</div>
-                    </div>
-
-                </a>
-
             </div>
         </div>
-    </div>
-    <!-- /Header TOP -->
-
-    <!-- Header BOTTOM -->
-    {{ head_menu_widget({'mobile':false}) }}
-    <!-- /Header BOTTOM -->
-
-</header>
-<div class="b-mobile-nav js-mobile-nav">
-    <div class="js-nav-toggle b-mobile-nav__toggle"><span class="icon-nav">toggle menu</span></div>
-    <div class="b-mobile-nav__heading">
-        <a href="{{ Url.home() }}" class="">{{ this.params.main }}</a>
-    </div>
-    <div class="b-mobile-nav_wrapper js-scrollPane">
-        <ul class="b-mobile-nav__list">
-            {{ head_menu_widget({'mobile':true}) }}
-
-
-
-        </ul>
-
-        <ul class="b-mobile-nav__list">
-            <li class="b-mobile-nav__item js-accordion__item">
+        <div class="header__user-auth">
+            <div class="user-auth">
+                <div class="user-auth__avatar"><i class="icon icon-user"></i></div>
+                <div class="user-auth__details"><a class="user-auth__user-name" href="personal.html">Евгений</a><a class="user-auth__user-logout" href="registration.html">(выйти)</a>
+                    <div class="user-auth__user-discount">ваша скидка 5%</div>
+                </div>
+            </div>
+        </div>
+        <div class="header__cart"><a class="cart" href="cart.html"><span class="cart__icon"><i class="icon icon-cart"></i></span><span class="cart__details"><span class="cart__details-text">Корзина </span><span class="cart__details-qty">(12)</span></span></a></div>
+        <div class="header__langs">
+            <div class="langs">
                 {% for l in this.params.langs %}
-                {% if l == this.params.lang %}
-                <span class="b-mobile-nav__link b-mobile-nav__link_accordion js-accordion__trigger">{{ l.name|slice(0,3) }}</span>
-                {% endif %}
+
+                        <a class="langs__item  {% if l == this.params.lang %}  is--current {% endif %}" href="{{ l.langUrl }}">{{ l.local|slice(0,2) }}</a>
+
                 {% endfor %}
-                <ul class="b-mobile-subnav js-accordion__content">
-                    {% for l in this.params.langs %}
-                    {% if l != this.params.lang %}
-                    <li class="b-mobile-nav__item">
-                        <a href="{{ l.langUrl  }}" class="b-mobile-nav__link">{{ l.name|slice(0,3) }}</a>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-            </li>
-         </span>
 
-
-
-            <li class="b-mobile-nav__item">
-                {% if app.user.isGuest %}
-                <a class="b-mobile-nav__link" href="{{ Url.toRoute('/login') }}" data-toggle="modal" data-target="#myModal_2" >{#Личный кабинет#}{{ this.params.profile }}</a> <a href="{{ Url.toRoute('/logup') }}" class="b-mobile-nav__link" data-toggle="modal" data-target="#myModal_1" >{#Регистрация#}{{ this.params.registration }}</a>
-                {% else %}
-                    <a class="b-mobile-nav__link" href="{{ Url.toRoute('/user/index') }}">{#Профиль#}{{ this.params.login }}</a><a  class="b-mobile-nav__link" href="{{ Url.toRoute('/logout') }}" >{#Регистрация#}{{ this.params.exit }}</a>
-                {% endif %}
-            </li>
-        </ul>
-
-{#
-        {{ catalog_widget({'bottom':false}) }}
-#}
+                </div>
+        </div>
     </div>
-</div>
-<!-- /HEADER -->
+</header>
+{{ head_menu_widget({'mobile':false}) }}
+
 
 
 {{ content | raw }}
@@ -159,209 +123,144 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
-                <div class="block-1">
-                    <img src="/img/header/logo.png" alt="">
-                    <div class="txt_block-1">{#Пекарня осетинских пирогов "ИРОН-КАБИС" - единственная в Киеве, где пекут настоящие осетинские пироги с пылу, с жару в дровяной печи.#} {{ this.params.text_footer }}</div>
+    <div class="footer__top">
+        <div class="container">
+            <div class="row">
+                <div class="col col--3-of-12 col--s-12-of-12 col--m-3-of-12 col--l-3-of-12">
+                    <nav class="menu">
+                        <h3 class="menu__title">Информация</h3>
+                        <ul class="menu__list">
+                            <li class="menu__item"><a class="menu__link" href="about.html">О компании</a></li>
+                            <li class="menu__item"><a class="menu__link" href="contact-us.html">Свяжитесь с нами</a></li>
+                            <li class="menu__item is--empty"></li>
+                            <li class="menu__item"><span class="menu__text">График работы:</span></li>
+                            <li class="menu__item"><span class="menu__text">пн – чт: 10:00 – 03:00</span></li>
+                            <li class="menu__item"><span class="menu__text">Пт – Сб: 10:00 – 05:00</span></li>
+                            <li class="menu__item"><span class="menu__text">Вс:           11:00 – 03:00</span></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col col--3-of-12 col--s-12-of-12 col--m-3-of-12 col--l-3-of-12">
+                    <nav class="menu">
+                        <h3 class="menu__title">Контакты</h3>
+                        <ul class="menu__list">
+                            <li class="menu__item"><a class="menu__link" href="tel:+77018888534">+7 (701) 888 85 34</a></li>
+                            <li class="menu__item"><a class="menu__link" href="tel:+77273902020">+7 (727) 390 20 20</a></li>
+                            <li class="menu__item is--empty"></li>
+                            <li class="menu__item"><a class="menu__link" href="">Заказать звонок</a></li>
+                            <li class="menu__item is--empty"></li>
+                            <li class="menu__item"><a class="menu__link" href="mailto:info@topperz.kz">info@topperz.kz</a></li>
+                        </ul>
+                    </nav>
                 </div>
 
-            </div>
-            {{ catalog_widget({'bottom':true}) }}
-            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-                <div class="block-3">
-                    <div class="title_block">{{ this.params.contacts }}</div>
-                    <div class="address">{#Киев,  Верхний Вал, 66#}{{ this.params.address }}</div>
-                    <div class="phone">
-                        <span class="title">{#Телефон#}{{ this.params.phone }}:</span>
-                        <span class="value">{#(044) 444 55 66#}{{ this.params.phone_1 }}</span>
-                    </div>
-                    <div class="phone">
-                        <span class="title">{{ this.params.phone }}:</span>
-                        <span class="value">{#(044) 555 66 77#}{{ this.params.phone_2 }}</span>
-                    </div>
-                    <div class="email">
-                        <span class="title">Email:</span>
-                        <span class="value">{{ this.params.mail_footer }}</span>
-                    </div>
-                </div>
+                {{ bottom_menu_widget({'menu_bottom':true}) }}
+                {{ bottom_menu_widget({'menu_bottom':false}) }}
+
             </div>
         </div>
     </div>
-    <div class="bottom_block">
+    <div class="footer__bottom">
         <div class="container">
-            <div class="">
-                <div class="left_block">
-                   {# ПЕКАРНЯ «ИРОН — КАБИС»#}{{ this.params.name_of_company }}
+            <hr class="footer__divider">
+            <div class="row">
+                <div class="col col--3-of-12 col--s-12-of-12 col--m-12-of-12 col--l-3-of-12">
+                    <div class="logo in--footer"><img class="logo__img" src="images/logo-small.png" alt=""><img class="logo__img--mobile" src="images/logo-footer-mob.png" alt=""></div>
+                    <div class="contact-info is--footer">
+                        <div class="contact-info__phone">+7 (701) 888 85 34</div>
+                        <div class="contact-info__phone">+7 (727) 390 20 20</div><a class="contact-info__action" href=""> <i class="icon icon-whatsapp-small"></i><span>WhatsApp</span></a>
+                    </div>
                 </div>
-                <div class="right_block">
-                    <ul class="soc_list">
-
-                        <li class="item">
-                            <a href="{{ this.params.vk_link }}" class="link_item ">
-                                <i class="fab fa-vk"></i>
-                            </a>
-                        </li>
-
-                        <li class="item">
-                            <a href="{{ this.params.fb_link }}" class="link_item ">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-
-                        <li class="item">
-                            <a href="{{ this.params.tw_link }}" class="link_item ">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-
-                        <li class="item">
-                            <a href="{{ this.params.linkedin_link }}" class="link_item ">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </li>
-
-                        <li class="item">
-                            <a href="{{ this.params.inst_link }}" class="link_item ">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-
-                    </ul>
+                <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                    <div class="social-icons in--footer">
+                        <div class="social-icons__text">Следите за нами</div><a class="social-icons__link" href=""><i class="icon icon-facebook"></i></a><a class="social-icons__link" href=""><i class="icon icon-instagram"></i></a><a class="social-icons__link" href=""><i class="icon icon-vk"></i></a>
+                    </div>
+                </div>
+                <div class="col col--3-of-12 col--s-12-of-12 col--m-12-of-12 col--l-3-of-12">
+                    <div class="copyright in--footer">© Copyright TOPPERZ.com.ua 2017</div>
                 </div>
             </div>
-
         </div>
     </div>
 </footer>
-<!-- /FOOTER -->
-<div id="modal_1_success"  style="z-index: 1000000;" class="modal fade myModal_ok">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal">×</button>
-                <span class="js-successs"></span>
+<!-- /FOOTER-->
+<div style="display: none;">
+    <div class="popup" id="thanks">
+        <div class="popup__close arcticmodal-close"></div>
+        <div class="popup__inner">
+            <div class="popup__header">Спасибо!</div>
+            <div class="popup__body">
+                <p class="is--text-center">Ваш заказ успешно оформлен<br>Мы свяжемся с вами в ближайшее время<br><strong>Номер вашего заказа #245-327</strong></p>
             </div>
-            <div class="modal-body">
-
-                <button  class="btn_ok" data-dismiss="modal">ok</button>
-
+            <div class="popup__footer"><a class="btn btn--primary" href="">Спасибо</a></div>
+        </div>
+    </div>
+    <div class="popup" id="cartOrder">
+        <div class="popup__close arcticmodal-close"></div>
+        <div class="popup__inner">
+            <div class="cart-order">
+                <h4 class="cart-order__header"> <span class="cart-order__header-text">Ваш заказ</span><span class="cart-order__total-qty">12</span></h4>
+                <div class="cart-order__body">
+                    <article class="cart-order__product">
+                        <div class="cart-order__product-photo"><img src="images/cart-order/p-1.jpg" alt=""></div>
+                        <div class="cart-order__product-content">
+                            <h4 class="cart-order__product-title"> <a class="cart-order__product-title-link" href="">Дэль-анатра</a></h4>
+                            <div class="cart-order__product-details">
+                                <div class="cart-order__product-variant product-variant"><i class="icon icon-diameter-md product-variant__icon"></i><span class="cart-order__product-variant-value product-variant__value">38</span><span class="cart-order__product-variant-dimension product-variant__dimension">см</span></div>
+                                <div class="cart-order__product-additives"><span class="cart-order__product-additives-value">+2 </span><span class="cart-order__product-additives-text">Добавки</span></div>
+                                <div class="cart-order__product-qty">
+                                    <div class="product-qty js-qty"><i class="product-qty__minus icon icon-minus js-qty-minus"></i>
+                                        <input class="product-qty__value js-qty-value" type="text" name="product_qty" value="1"><i class="product-qty__plus icon icon-plus js-qty-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="cart-order__product-price">
+                                    <div class="cart-order__product-price-value">1 590</div>
+                                    <div class="cart-order__product-price-currency">тнг</div>
+                                </div>
+                                <div class="cart-order__product-remove"><i class="icon icon-delete"></i></div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="cart-order__product">
+                        <div class="cart-order__product-photo"><img src="images/cart-order/p-2.jpg" alt=""></div>
+                        <div class="cart-order__product-content">
+                            <h4 class="cart-order__product-title"> <a class="cart-order__product-title-link" href="">Цезарь</a></h4>
+                            <div class="cart-order__product-details">
+                                <div class="cart-order__product-variant product-variant"><i class="icon icon-diameter-md product-variant__icon"></i><span class="cart-order__product-variant-value product-variant__value">38</span><span class="cart-order__product-variant-dimension product-variant__dimension">см</span></div>
+                                <div class="cart-order__product-additives"></div>
+                                <div class="cart-order__product-qty">
+                                    <div class="product-qty js-qty"><i class="product-qty__minus icon icon-minus js-qty-minus"></i>
+                                        <input class="product-qty__value js-qty-value" type="text" name="product_qty" value="1"><i class="product-qty__plus icon icon-plus js-qty-plus"></i>
+                                    </div>
+                                </div>
+                                <div class="cart-order__product-price">
+                                    <div class="cart-order__product-price-value">2 910</div>
+                                    <div class="cart-order__product-price-currency">тнг</div>
+                                </div>
+                                <div class="cart-order__product-remove"><i class="icon icon-delete"></i></div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="cart-order__footer">
+                    <div class="cart-order__footer-text">Итого:</div>
+                    <div class="cart-order__footer-total-price">
+                        <div class="cart-order__footer-total-price-value">25 080</div>
+                        <div class="cart-order__footer-total-price-currency">тнг</div>
+                    </div>
+                </div>
+                <div class="cart-order__action"><a class="btn btn--order" href="">Оформить заказ</a></div>
             </div>
         </div>
     </div>
 </div>
-<div id="modal_success"  class="modal fade myModal_link">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal">×</button>
-                Товар добавлен
-            </div>
-            <div class="modal-body">
-
-
-
-
-                    <a href="{{ Url.toRoute('/backet') }}" class="btn_link">Перейти в корзину</a>
-
-            </div>
-
-
-        </div>
-    </div>
-</div>
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal">×</button>
-                {#Обратный звонок#}{{ this.params.callback }}
-            </div>
-
-            <div class="modal-body">
-                <form id="js-callback" class="call_back">
-
-                    <input type="text" id="name_callback" name="name" class="name_callback" required placeholder="{{ this.params.your_name }}"/>
-
-                    <input type="text" id="phone_callback" name="phone" class="phone_callback" required placeholder="{{ this.params.phone }}"/>
-
-                    <button type="submit" class="btn_send">{{ this.params.send }}</button>
-
-                </form>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
-<div id="myModal_1" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal">×</button>
-                {{ this.params.registration }}
-            </div>
-
-            <div class="modal-body">
-                <form id="sign-up" class="call_back">
-
-                    <input type="text" id="username" class="name_callback" name="username" required placeholder="{{ this.params.your_name }}"/>
-
-                    <input type="text" id="phone" class="phone_callback" name="phone" required placeholder="{{ this.params.phone }}"/>
-
-                    <input type="text" id="email" class="email_callback" name="email" required placeholder="e-mail"/>
-
-                    <input type="password" id="password" class="password_callback" name="password" required  placeholder="{{ this.params.password }}"/>
-
-                    <input type="password" id="password_repick" class="password_callback" name="password_repick" required placeholder="{{ this.params.password }}"/>
-
-                    <button type="submit" class="btn_send">{#Зарегистрироваться#}{{ this.params.registration }}</button>
-                    <span class="js-registration-answer"></span>
-
-                </form>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
-<div id="myModal_2" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" type="button" data-dismiss="modal">×</button>
-                {{ this.params.login }}
-            </div>
-
-            <div class="modal-body">
-                <form id="sign-in" class="call_back">
-
-                    <input type="text"  name="email" class="email_callback" required placeholder=" e-mail"/>
-
-                    <input type="password"  name="password" class="password_callback" required  placeholder="{{ this.params.password }}"/>
-
-                    <button type="submit" class="btn_send">{{ this.params.login }}</button>
-                    <span class="js-answer-status"></span>
-                </form>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
 
 <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
 
 
 
 {{ this.endBody }}
-{% if this.params.edit_script %}
-    {{ this.params.script|raw }}
-{% endif %}
+
 </body>
 </html>
 {{ this.endPage }}

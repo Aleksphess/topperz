@@ -50,7 +50,22 @@ class MainSlider extends \common\components\BaseActiveRecord
             'update_time' => Yii::t('app', 'Date of update'),
         ];
     }
-
+    public function behaviors()
+    {
+        return [
+            'timestamps' => [
+                'class' => \yii\behaviors\TimestampBehavior::className(),
+                'createdAtAttribute' => 'creation_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+            'thumb' => [
+                'class' => \common\components\behavior\ImgBehavior::className()
+            ],
+//            'translit' => [
+//                'class' => \common\components\behavior\TranslitBehavior::className()
+//            ],
+        ];
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

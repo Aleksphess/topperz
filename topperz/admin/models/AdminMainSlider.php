@@ -9,8 +9,8 @@ class admin_main_slider extends AdminTable
     public $IMG_SIZE = 760;
     public $IMG_VSIZE = 425;
     public $IMG_RESIZE_TYPE = 1;
-    public $IMG_BIG_SIZE = 1130;
-    public $IMG_BIG_VSIZE = 488;
+    public $IMG_BIG_SIZE = 1180;
+    public $IMG_BIG_VSIZE = 432;
     public $ECHO_NAME = 'title';
     public $SORT = 'sort DESC';
     public $NAME = "слайды";

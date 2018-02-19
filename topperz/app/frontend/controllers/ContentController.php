@@ -58,16 +58,17 @@ class ContentController extends \common\components\BaseController
     public function actionIndex()
     {
 
-        $products=CatalogProducts::find()->joinWith('info','params')->orderBy('sort ASC')->limit(9)->all();
+      /*  $products=CatalogProducts::find()->joinWith('info','params')->orderBy('sort ASC')->limit(9)->all();
         $categories=CatalogCategories::find()->active()->joinWith('info')->orderBy('sort DESC')->all();
         $slides=MainSlider::find()->joinWith('info')->orderBy('sort DESC')->all();
         SeoComponent::setByTemplate('default', [
             'name' => Yii::$app->view->params['main'],
-        ]);
+        ]);*/
+        $slides=MainSlider::find()->orderBy('sort DESC')->all();
+      $products = CatalogProducts::find()->joinWith('consists','info')->joinWith('topics','params')->all();
 
         return $this->render('index.twig', [
             'products'  =>  $products,
-            'categories'    => $categories,
             'slides'        =>  $slides
         ]);
     }

@@ -40,7 +40,7 @@ class BaseController extends \yii\web\Controller
 
         $this->layout = 'main.twig';
 
-        $session = Yii::$app->session;
+      /*  $session = Yii::$app->session;
         $session->open();
         $cart_count = 0;
         $summ=0;
@@ -54,7 +54,7 @@ class BaseController extends \yii\web\Controller
         }
         
         $this->view->params['cart_count']   = $cart_count;
-        $this->view->params['cost']   = $summ;
+        $this->view->params['cost']   = $summ;*/
         $lang                               = Lang::getCurrent();
         $this->view->params['lang']         = $lang;
         $this->view->params['lang_sh']      = mb_substr(($lang->name),0,3, 'utf-8');
@@ -62,7 +62,7 @@ class BaseController extends \yii\web\Controller
         $this->view->params['langs']        = $langs;
         $current_url                        = Yii::$app->request->pathinfo;
 
-        $slovar = Slovar::find()
+      /*  $slovar = Slovar::find()
                         ->leftJoin('slovar_info', '`record_id`=`id`')
                         ->select(['slovar.alias', 'slovar_info.value'])
                         ->where(['lang' => Lang::getCurrentId()])
@@ -70,7 +70,7 @@ class BaseController extends \yii\web\Controller
                         ->all();
         $slovar = ArrayHelper::map($slovar, 'alias', 'value');
 
-        $this->view->params = array_merge($this->view->params, $slovar);
+        $this->view->params = array_merge($this->view->params, $slovar);*/
         
         if($lang->by_default)
         {

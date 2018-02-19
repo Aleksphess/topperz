@@ -59,11 +59,11 @@ class admin_catalog_products extends AdminTable
     public $IMG_SIZE        = 180; // макс высота
     public $IMG_VSIZE       = 137;
     public $IMG_RESIZE_TYPE = 1; //рeсайз по высоте
-    public $IMG_BIG_SIZE    = 350 ;
-    public $IMG_BIG_VSIZE   = 212;
+    public $IMG_BIG_SIZE    = 280 ;
+    public $IMG_BIG_VSIZE   = 300;
     public $IMG_NUM         = 10;
     public $ECHO_NAME       = 'title';
-    public $IMG_TYPE        = 'png';
+    public $IMG_TYPE        = 'jpg';
     public $RUBS_NO_UNDER   = 1;
 
     public $FIELD_UNDER     = 'category_id';
@@ -71,7 +71,7 @@ class admin_catalog_products extends AdminTable
     public $NAME2           = "товара";
 
     public $MULTI_LANG = 1;
-    public $USE_TAGS        = 0;
+
 
     function __construct()
     {
@@ -80,11 +80,18 @@ class admin_catalog_products extends AdminTable
             new Field("category_id","Относится к категории",9, [
                 'showInList'=>0, 'editInList'=>0, 'valsFromTable'=>'catalog_categories', 'valsFromCategory'=>-1,
                 'valsEchoField'=>'title']),
-            new Field("product_id","Оставить не заполненым",9, [
+            new Field("type","Категория для пицц",10, array('showInList'=>1, 'values'=>['classic', 'proprietary'])),
+            /*new Field("product_id","Оставить не заполненым",9, [
                 'showInList'=>0, 'editInList'=>0, 'valsFromTable'=>'catalog_products', 'valsFromCategory'=>-1,
-                'valsEchoField'=>'title']),
+                'valsEchoField'=>'title']),*/
             new Field("title","Заголовок",1, array('multiLang'=>1)),
             new Field("text","Текст",2, array('multiLang'=>1)),
+            new Field("label_id","Лейбл",9, [
+                'showInList'=>0, 'editInList'=>0, 'valsFromTable'=>'catalog_label',
+                'valsEchoField'=>'title']),
+            new Field("price","Цена по умолчанию",1),
+            new Field("assoc","составы ",4),
+            new Field("assoc_topic","топики",4),
             new Field("also_ids","Товары, которые рекомендуются покупать вместе с данным
              (ID товаров через запятую, пример: 545,567)",1),
             new Field("sort","SORT",4),
@@ -107,7 +114,38 @@ class admin_catalog_products extends AdminTable
     {
         $this->afterAdd($row);
     }
+
+    function show_assoc_topic($row)
+    {
+        if (empty($row['id'])) {
+            $row['id'] = rand(100000,999999);
+        }
+        return genAssocBlock(['name' => 'Топики', 'id' => $row['id'], 'tableRubsAssoc' => 'topic_products_assoc']);
+    }
+
+    function show_assoc($row)
+    {
+        if (empty($row['id'])) {
+            $row['id'] = rand(100000,999999);
+        }
+        return genAssocBlock(['name' => 'Состав', 'id' => $row['id'], 'tableRubsAssoc' => 'consist_products_assoc']);
+    }
 }
+
+class admin_consist_products_assoc
+{
+    public $tableRubs   = 'catalog_consist';
+    public $tableItems  = 'catalog_products';
+    public $colUnder    = 'consist_id';
+    public $colRecord   = 'product_id';
+};
+class admin_topic_products_assoc
+{
+    public $tableRubs   = 'catalog_topic';
+    public $tableItems  = 'catalog_products';
+    public $colUnder    = 'topic_id';
+    public $colRecord   = 'product_id';
+};
 class admin_catalog_params extends AdminTable
 {
     public $TABLE           = 'catalog_params';
@@ -118,7 +156,7 @@ class admin_catalog_params extends AdminTable
     public $IMG_BIG_SIZE    = 509 ;
     public $IMG_BIG_VSIZE   = 368;
     public $IMG_NUM         = 0;
-    public $ECHO_NAME       = 'title';
+    public $ECHO_NAME       = 'value';
 
     public $FIELD_UNDER     = 'product_id';
     public $NAME            = "Характеристики";
@@ -134,10 +172,9 @@ class admin_catalog_params extends AdminTable
             new Field("product_id","Относится к категории",9, [
                 'showInList'=>0, 'editInList'=>0, 'valsFromTable'=>'catalog_products',
                 'valsEchoField'=>'title']),
-            new Field("title","Название",1, array('multiLang'=>1)),
             new Field("value","Значение",1),
             new Field("type","Тип(л,см)",1, array('multiLang'=>1)),
-            new Field("weight","Вес(для пирогов, в граммах)",1),
+            new Field("weight","Вес",1),
             new Field("price","Цена",1),
             new Field("sort","SORT",4),
             new Field("creation_time","Date of creation",4),
@@ -180,15 +217,17 @@ class admin_catalog_consist extends AdminTable
     function __construct()
     {
         $this->fld=array(
-            new Field("product_id","Относится к категории",9, [
+            /*new Field("product_id","Относится к категории",9, [
                 'showInList'=>0, 'editInList'=>0, 'valsFromTable'=>'catalog_products',
-                'valsEchoField'=>'title']),
+                'valsEchoField'=>'title']),*/
             new Field("title","Название",1, array('multiLang'=>1)),
             new Field("sort","SORT",4),
             new Field("creation_time","Date of creation",4),
             new Field("update_time","Date of update",4),
         );
     }
+
+
 
     function afterAdd($row)
     {
@@ -200,3 +239,88 @@ class admin_catalog_consist extends AdminTable
         $this->afterAdd($row);
     }
 }
+class admin_catalog_topic extends AdminTable
+{
+    public $TABLE           = 'catalog_topic';
+    public $SORT            = 'id ASC';
+    public $IMG_SIZE        = 180; // макс высота
+    public $IMG_VSIZE       = 137;
+    public $IMG_RESIZE_TYPE = 1; //рeсайз по высоте
+    public $IMG_BIG_SIZE    = 60 ;
+    public $IMG_BIG_VSIZE   = 47;
+    public $IMG_NUM         = 1;
+    public $ECHO_NAME       = 'title';
+    public $IMG_TYPE        = 'png';
+    public $FIELD_UNDER     = 'product_id';
+    public $NAME            = "Топик";
+    public $NAME2           = "ингридиент состава";
+
+    public $MULTI_LANG = 1;
+    public $USE_TAGS        = 0;
+
+    function __construct()
+    {
+        $this->fld=array(
+            new Field("product_id","Относится к категории",9, [
+                'showInList'=>0, 'editInList'=>0, 'valsFromTable'=>'catalog_products',
+                'valsEchoField'=>'title']),
+            new Field("title","Название",1, array('multiLang'=>1)),
+            new Field("price","Цена за 1 топик",1 ),
+            new Field("sort","SORT",4),
+            new Field("creation_time","Date of creation",4),
+            new Field("update_time","Date of update",4),
+        );
+    }
+
+
+
+    function afterAdd($row)
+    {
+        YandexTranslate($row, $this->TABLE);
+    }
+
+    function afterEdit($row)
+    {
+        $this->afterAdd($row);
+    }
+}
+
+class admin_catalog_label extends AdminTable
+{
+    public $TABLE           = 'catalog_label';
+    public $SORT            = 'id ASC';
+
+    public $IMG_NUM         = 0;
+    public $ECHO_NAME       = 'title';
+    public $NAME            = "Лейблы";
+    public $NAME2           = "лейбл";
+
+    public $MULTI_LANG = 1;
+    public $USE_TAGS        = 0;
+
+    function __construct()
+    {
+        $this->fld=array(
+
+            new Field("title","Название",1, array('multiLang'=>1)),
+            new Field("alias","alias",1 ),
+            new Field("sort","SORT",4),
+            new Field("creation_time","Date of creation",4),
+            new Field("update_time","Date of update",4),
+        );
+    }
+
+
+
+    function afterAdd($row)
+    {
+        YandexTranslate($row, $this->TABLE);
+    }
+
+    function afterEdit($row)
+    {
+        $this->afterAdd($row);
+    }
+}
+
+

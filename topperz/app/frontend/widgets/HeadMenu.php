@@ -13,6 +13,7 @@ class HeadMenu extends \yii\base\Widget
 
     public function run()
     {
+
         $menu = Menu::find()->top()->joinWith('info')
             ->all();
         if($this->mobile)

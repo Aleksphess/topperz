@@ -1,0 +1,65 @@
+{{ use('frontend/widgets/NewsWidget') }}
+{{ use('frontend/widgets/Advantages') }}
+{{ use('frontend/widgets/User') }}
+<section class="section section--profile">
+    <div class="container">
+        {{ user_widget() }}
+        <h2 class="section__title is--align-left">Пополнить баланс и продлить</h2>
+        <div class="section__content">
+            <div class="payment">
+                <div class="payment__items">
+                    <div class="payment__item">
+                        <div class="payment__item-inner">
+                            <div class="payment__item-price">{{ payment.payment_30 }}</div>
+                            <div class="payment__item-period">30 дней</div>
+                       {#     <div class="payment__item-prop">популярность — 50 </div>
+                            <div class="payment__item-link"><a href="">подробнее</a></div>#}
+                            <div class="payment__item-date">Срок до <strong>{{ payment_date.date_30 }}</strong></div>
+                            <div class="payment__item-action">{{ liqpay_button_30|raw }}</div>
+                        </div>
+                    </div>
+                    <div class="payment__item">
+                        <div class="payment__item-inner">
+                            <div class="payment__item-price">{{ payment.payment_90 }}</div>
+                            <div class="payment__item-period">90 дней</div>
+                        {#    <div class="payment__item-prop">популярность — 200</div>
+                            <div class="payment__item-prop">+ баннер на 15 дней</div>
+                            <div class="payment__item-prop">+1 общая рассылка</div>
+                            <div class="payment__item-link"><a href="">подробнее</a></div>#}
+                            <div class="payment__item-date">Срок до <strong>{{ payment_date.date_90 }}</strong></div>
+                            <div class="payment__item-action">{{ liqpay_button_90|raw }}</div>
+                        </div>
+                    </div>
+                    <div class="payment__item">
+                        <div class="payment__item-inner">
+                            <div class="payment__item-price">{{ payment.payment_180 }}</div>
+                            <div class="payment__item-period">180 дней</div>
+                          {#  <div class="payment__item-prop">популярность — 500</div>
+                            <div class="payment__item-prop">+ баннер на 40 дней</div>
+                            <div class="payment__item-prop">+2 общих рассылки</div>
+                            <div class="payment__item-link"><a href="">подробнее</a></div>#}
+                            <div class="payment__item-date">Срок до <strong>{{ payment_date.date_180 }}</strong></div>
+                            <div class="payment__item-action">{{ liqpay_button_180|raw }}</div>
+                        </div>
+                    </div>
+                    <div class="payment__item">
+                        <div class="payment__item-inner">
+                            <div class="payment__item-price">{{ payment.payment_360 }}</div>
+                            <div class="payment__item-period">360 дней</div>
+                          {#  <div class="payment__item-prop">популярность — 1200</div>
+                            <div class="payment__item-prop">+ баннер на 90 дней</div>
+                            <div class="payment__item-prop">+3 общих рассылки</div>
+                            <div class="payment__item-prop">+1 индивидуальная рассылка</div>
+                            <div class="payment__item-link"><a href="">подробнее</a></div>#}
+                            <div class="payment__item-date">Срок до <strong>{{ payment_date.date_360 }}</strong></div>
+                            <div class="payment__item-action">{{ liqpay_button_360|raw }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="section__divider">
+    </div>
+</section>
+{{ news_widget_widget() }}
+{{ advantages_widget() }}

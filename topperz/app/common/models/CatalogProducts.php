@@ -86,15 +86,25 @@ class CatalogProducts extends \common\components\BaseActiveRecord
     {
         return $this->hasMany(CatalogParams::className(), ['product_id' => 'id']);
     }
-    public function getConsist()
+    public function getConsists()
     {
-        return $this->hasMany(CatalogConsist::className(), ['product_id' => 'id']);
+        return $this->hasMany(ConsistProductsAssoc::className(), ['product_id' => 'id']);
+    }
+    public function getTopics()
+    {
+        return $this->hasMany(TopicProductsAssoc::className(), ['product_id' => 'id']);
     }
 
     public function getParent()
     {
         return $this->hasOne(CatalogCategories::className(), ['id'=>'category_id']);
     }
+
+    public function getLabel()
+    {
+        return $this->hasOne(CatalogLabel::className(), ['id'=>'label_id']);
+    }
+
     public function getUrl()
     {
         return Url::toRoute('/'.$this->parent->alias.'/'.$this->alias);

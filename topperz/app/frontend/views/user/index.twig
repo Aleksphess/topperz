@@ -1,0 +1,116 @@
+{{ use('frontend/widgets/CabinetMenu') }}
+{% if user==1 %}
+<section class="section_lots">
+    <div class="container">
+        <header class="section__header section__header_catalog">
+            <h2>Мои Франшизы</h2>
+            <div class="row">
+                <a href="{{ Url.to('/lots/create') }}" class="controls__close btn btn-primary" style="float: left; margin-left: 16px; margin-top: 5px;">Создать франшизу</a>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-lg-3 col-lg-push-9 col-md-3 col-md-push-9 col-sm-4 col-sm-push-8 col-xs-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{ cabinet_menu_widget() }}
+                    </div>
+                    <div class="col-sm-12 hidden-xs">
+                        <img src="/img/banner2.jpg" alt="" class="img-responsive bananer">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-lg-pull-3 col-md-9 col-md-pull-3 col-sm-8 col-sm-pull-4 col-xs-12">
+                {% if lots %}
+                    {% for lot in lots%}
+                        <article class="lot_my {% if lot.status_id == 1 %} lot_active {% else %} lot_inactive {% endif %}ad_my">
+                            <div class="row">
+                                <aside class="col-sm-3">
+                                    <img src="{{ lot.simg }}" alt="{{ lot.name | raw }}" class="img-responsive ad__img_my">
+                                </aside>
+                                <div class="col-sm-9">
+                                    <div class="lot__content">
+                                        
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="lot__info">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="info__field field_place">
+                                                                <span>{{ lot.locality.name_ru | raw }}, {{ lot.address | raw }}</span>
+                                                            </div>
+                                                            <div class="info__field field_rubric">
+                                                                <span>{{ lot.category.info.name | raw}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="field_calendar">
+                                                                <div class="field_from">
+                                                                    <span>Начало:</span>
+                                                                    <span class="date_from">{{ lot.begin_date | raw }}</span>
+                                                                </div>
+                                                                <div class="field_to">
+                                                                    <span>Окончание:</span>
+                                                                    <span class="date_to">{{ lot.end_date | raw }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="info__field field_views">
+                                                                <span>Просмотров:</span>
+                                                                <span class="views__num">{{ lot.views_count | raw }}</span>
+                                                            </div>
+                                                            <div class="info__field field_propos">
+                                                                <span>Предложений:</span>
+                                                                <span class="propos__num">{{ lot.suggestions_count | raw }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-xs-12">
+                                                <div class="lot__controls">
+                                                    <a href="{{ lot.url }}" class="controls__link">Подробнее о франшизе</a>
+                                                    {% if lot.status_id == 1 %}
+                                                        <a href="{{ lot.editUrl }}" class="controls__link">Редактировать</a>
+                                                        <button class="controls__close btn btn-primary close__lot" data-lot-id="{{ lot.id }}">Закрыть франшизу</button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <h2>Франшиз пока нет :(</h2>
+                {% endif %}
+                                   
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="section_lots">
+    <div class="container">
+        <header class="section__header section__header_catalog">
+            <h2>Начать поиск франшиз</h2>
+           
+        </header>
+        <div class="row">
+            <div class="col-lg-3 col-lg-push-9 col-md-3 col-md-push-9 col-sm-4 col-sm-push-8 col-xs-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{ cabinet_menu_widget() }}
+                    </div>
+                    <div class="col-sm-12 hidden-xs">
+                        <img src="/img/banner2.jpg" alt="" class="img-responsive bananer">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+{% endif %}

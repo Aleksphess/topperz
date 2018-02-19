@@ -1,0 +1,20 @@
+<div class="col col--3-of-12 col--s-12-of-12 col--m-3-of-12 col--l-3-of-12">
+    <nav class="menu">
+        <h3 class="menu__title">Меню</h3>
+        <div class="row">
+            {% for item in menu %}
+                {% if loop.first or loop.index%7==1 %}
+            <div class="col col--4-of-12 col--s-12-of-12">
+                <ul class="menu__list">
+                    {% endif %}
+                    <li class="menu__item"><a class="menu__link" href="{{ item.url }}">{{ item.info.title }}</a></li>
+
+                {% if loop.last or loop.index%7==0 %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+    </nav>
+</div>

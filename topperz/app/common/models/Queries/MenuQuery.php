@@ -35,4 +35,16 @@ class MenuQuery extends \common\components\BaseActiveQuery
     {
         return $this->andWhere(['top_menu'=>1]);
     }
+    public function bottom()
+    {
+        return $this->andWhere(['buttom_menu'=>1]);
+    }
+    public function inMenu()
+    {
+        return $this->andWhere(['in_menu_menu'=>1]);
+    }
+    public function noMenu()
+    {
+        return $this->andWhere(['in_menu_menu'=>0]);
+    }
 }

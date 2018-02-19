@@ -16,7 +16,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
-     //   'js/vendor.js',
+        'js/vendor.js',
         //    'js/main2.js',
        'js/main.js',
 
