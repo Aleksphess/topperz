@@ -83,7 +83,7 @@ class AuthController extends \common\components\BaseController
         [
             'email'=>$request->post()['email'],
             'password'=>$request->post()['password'],
-            'active'=>\common\models\User::findOne(['email'=>$request->post()['email']])->active,
+           
         ];
        // var_dump($post);die();
         $model->setAttributes($post);
@@ -103,15 +103,14 @@ class AuthController extends \common\components\BaseController
 
     public function actionSignUp()
     {
-
-
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $request = Yii::$app->request;
 
         $model = new SignupForm();
 
 		$model->setAttributes($request->post(),false);
 		$post = $request->post();
-        if($post['password']!=$post['password_repick'])
+        if($post['password']!=$post['confirm_password'])
         {
             return 'Пароли не совпадают';
         }
@@ -119,14 +118,19 @@ class AuthController extends \common\components\BaseController
         if ($model->validate()) {
 
             $user = $model->signup();
+            $auth = new LoginForm();
+            $login_user=
+                [
+                    'email'=>$request->post()['email'],
+                    'password'=>$request->post()['password'],
+                ];
+            $auth->setAttributes($login_user);
+            if ($auth->login()) {
 
-            if (!is_null($user)) {
-                    $headers  = "Content-type: text/html; charset=UTF-8 \r\n";
-                    $headers .= "From:3pies.ua \r\n";
-                    mail($request->post()['email'],'Регистрация на 3pies.ua','Перейдите по ссылке для активации профиля '.$_SERVER['SERVER_NAME'].'/auth/'.$user->getAuthKey(), $headers);
-                    mail('aleksphespro@gmail.com','Регистрация на 3pies.ua','У вас появился новый пользователь'.$request->post()['username'], $headers);
-                    return 'success';
+                return ['answer'=>'success','url'=>Yii::$app->request->referrer];
             }
+            // var_dump($post);die();
+
 
         }
         else

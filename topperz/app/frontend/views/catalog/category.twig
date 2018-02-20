@@ -8,13 +8,43 @@
         <div class="category-panel">
             {% if category.alias=='picca' %}
             <div class="category-panel__block category-panel__block--type">
-                <div class="category-panel__block-current"><span class="category-panel__block-current-value">Классическая</span><i class="category-panel__block-current-icon icon-arrow-down-md"></i></div>
+
+                <div class="category-panel__block-current">
+                    <span class="category-panel__block-current-value">{% if type %}{% if type=='classic' %}Классическая {% elseif type=='proprietary' %}Фирменная{% endif %}{% else %}Классическая{% endif %}</span>
+                    <i class="category-panel__block-current-icon icon-arrow-down-md"></i></div>
                 <div class="category-panel__list"><a class="category-panel__list-item" href="{{ Url.toRoute('/picca/classic') }}">Классическая</a><a class="category-panel__list-item" href="{{ Url.toRoute('/picca/proprietary') }}">Фирменная</a></div>
             </div>
             {% endif %}
             <div class="category-panel__block category-panel__block--sort">
-                <div class="category-panel__block-current"><span class="category-panel__block-current-text">Сортировать:</span><span class="category-panel__block-current-value">по умолчанию</span><i class="category-panel__block-current-icon icon-arrow-down-md"></i></div>
-                <ul class="category-panel__list"><a class="category-panel__list-item is--stock" href="{{ category.url}}/sort/stock">акции</a><a class="category-panel__list-item is--novelty" href="{{ category.url}}/sort/new">новинки</a><a class="category-panel__list-item is--hit" href="{{ category.url}}/sort/hit">хиты продаж</a>{#<a class="category-panel__list-item" href="">по популярности</a>#}<a class="category-panel__list-item" href="{{ category.url}}/sort/asc">от дешевых к дорогим</a><a class="category-panel__list-item" href="{{ category.url}}/sort/desc">от дорогих к дешевым</a></ul>
+                <div class="category-panel__block-current"><span class="category-panel__block-current-text">Сортировать:</span>
+                    {% if sort %}
+                        {% if sort=='new' %}
+                            <span class="category-panel__block-current-value">новинки</span>
+                        {% elseif sort=='stock' %}
+                            <span class="category-panel__block-current-value is--stock">акции</span>
+                        {% elseif sort=='hit' %}
+                            <span class="category-panel__block-current-value">хиты продаж</span>
+                        {% elseif sort=='desc' %}
+                            <span class="category-panel__block-current-value">от дешевых к дорогим</span>
+                         {% elseif sort=='asc' %}
+                            <span class="category-panel__block-current-value">от дорогих к дешевым</span>
+                         {% endif %}
+                    {% else %}
+                        <span class="category-panel__block-current-value">по умолчанию</span>
+
+                    {% endif %}
+                    <i class="category-panel__block-current-icon icon-arrow-down-md"></i></div>
+                <ul class="category-panel__list">
+                    {% if sort %}
+                        <a class="category-panel__list-item " href="{{ category.url}}">по умолчанию</a>
+                    {% endif %}
+                    <a class="category-panel__list-item is--stock" href="{{ category.url}}{% if type %}/{{ type }}{% endif %}/sort/stock">акции</a>
+                    <a class="category-panel__list-item is--novelty" href="{{ category.url}}{% if type %}/{{ type }}{% endif %}/sort/new">новинки</a>
+                    <a class="category-panel__list-item is--hit" href="{{ category.url}}{% if type %}/{{ type }}{% endif %}/sort/hit">хиты продаж</a>
+                    {#<a class="category-panel__list-item" href="">по популярности</a>#}
+                    <a class="category-panel__list-item" href="{{ category.url}}{% if type %}/{{ type }}{% endif %}/sort/asc">от дешевых к дорогим</a>
+                    <a class="category-panel__list-item" href="{{ category.url}}{% if type %}/{{ type }}{% endif %}/sort/desc">от дорогих к дешевым</a>
+                </ul>
             </div>
         </div>
         {% for product in products %}

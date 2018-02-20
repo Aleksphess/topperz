@@ -1,37 +1,16 @@
 
-<div class="breadcrumbs_contacts_page">
-    <div class="container">
-        <ul class="bread_list">
-            <li class="item">
-                <a href="{{ Url.home() }}" class="link">{{ this.params.main }}</a>
-            </li>
-            <li class="item">
-                <span> / </span>
-            </li>
-            <li class="item">
-                <a {#href="{{ Url.toRoute('/'.page.alias) }}"#} class="link">{{ page.info.title }}</a>
-            </li>
-
-        </ul>
+<nav class="breadcrumbs">
+    <div class="container"><a class="breadcrumbs__item" href="{{ Url.home() }}">Главная</a><a class="breadcrumbs__item">{{ page.info.title }}</a>
     </div>
+</nav>
 
-</div>
-
-<div class="{{ page.alias }}_page">
-    <div class="container">
-        <div class="head_section">
-            {{ page.info.title }}
-        </div>
 
         {{ page.info.text|raw }}
-        <div class="seo_txt">
-            <h1 class="title">{{ Seo.get('h1') }}</h1>
-            <div class="txt">
-                {{ Seo.get('text')|raw  }}
-            </div>
+<section class="seo-text">
+    <div class="container">
+        <h1 class="seo-text__title">{{ Seo.get('h1') }} </h1>
+        <div class="seo-text__body">
+        {{ Seo.get('text')|raw }}
         </div>
     </div>
-
-
-
-</div>
+</section>

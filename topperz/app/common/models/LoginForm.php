@@ -28,7 +28,7 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-            ['active', 'compare','compareValue' => 1, 'operator' => '==', 'message' => 'Вы не активированы'],
+            
         ];
     }
 

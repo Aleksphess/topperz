@@ -27,9 +27,8 @@ class AddressDelivery extends \common\components\BaseActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'address'], 'required'],
+            [['user_id'], 'required'],
             [['user_id'], 'integer'],
-            [['address'], 'string', 'max' => 500],
         ];
     }
 

@@ -39,7 +39,7 @@ class ContentController extends \common\components\BaseController
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['static', 'contacts','reset','login'],
+                        'actions' => ['static', 'contacts','login'],
                         'allow' => true,
                         'roles' => ['@', '?'],
                     ],
@@ -88,7 +88,6 @@ class ContentController extends \common\components\BaseController
     }
 
 
-
     public function actionLogin()
     {
         SeoComponent::setByTemplate('static_page', [
@@ -98,15 +97,9 @@ class ContentController extends \common\components\BaseController
         {
             return $this->redirect( Url::toRoute('/user/index'),301);
         }
-        return $this->render('signin.twig');
+        return $this->render('login.twig');
     }
 
-    public function actionLogup()
-    {
-        SeoComponent::setByTemplate('static_page', [
-            'name' => Yii::$app->view->params['registration'],
-        ]);
-        return $this->render('logup.twig');
-    }
+
 
 }

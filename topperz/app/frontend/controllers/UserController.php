@@ -68,6 +68,9 @@ class UserController extends \common\components\BaseController
             'name' => 'robots',
             'content' => 'NOINDEX,NOFOLLOW'
         ]);
+        $this->view->registerJsFile('js/date.js',
+            ['depends' => [\frontend\assets\AppAsset::className()]]);
+
         SeoComponent::setByTemplate('user', [
             'name' => Yii::$app->params->view['profile'],
         ]);
@@ -91,8 +94,11 @@ class UserController extends \common\components\BaseController
             $current_user->username=trim(strip_tags($post['username']));
             $current_user->email=trim(strip_tags($post['email']));
             $current_user->phone=trim(strip_tags($post['phone']));
-            $current_user->facebook=trim(strip_tags($post['facebook']));
-            $current_user->vk=trim(strip_tags($post['vk']));
+            $current_user->surname=trim(strip_tags($post['surname']));
+            $current_user->middle_name=trim(strip_tags($post['middle_name']));
+            $current_user->dop_phone=trim(strip_tags($post['phone_alt']));
+            $current_user->date=trim(strip_tags($post['birthday']));
+
 
             if( $current_user->update())
             {
@@ -113,11 +119,25 @@ class UserController extends \common\components\BaseController
         $post = $request->post();
 
         $current_user = User::findIdentity(Yii::$app->user->identity->id);
-        $current_user->setPassword($post['password']);
+
+        if(!Yii::$app->getSecurity()->validatePassword($post['old_password'], $current_user->password_hash))
+        {
+            return ['status'=> false,'text' => 'Вы ввели неправильный старый пароль'];
+        }
+        if($post['new_password']==$post['old_password'])
+        {
+            return ['status'=> false,'text' => 'Старый и новый пароли  совпадают'];
+        }
+        if($post['new_password']!=$post['repeat_password'])
+        {
+            return ['status'=> false,'text' => 'Пароли не совпадают'];
+        }
+
+        $current_user->setPassword($post['new_password']);
 
         if( $current_user->update())
         {
-            return 'success';
+            return ['status'=> true,'text' => 'Успешно'];
         }
         return ['status' => false];
 
@@ -134,109 +154,38 @@ class UserController extends \common\components\BaseController
         $post = $request->post();
         $address = new AddressDelivery();
         $address->user_id = Yii::$app->user->identity->id;
-        $address->address = $post['address'];
+        $address->street = trim(strip_tags($post['street']));
+        $address->house = trim(strip_tags($post['house']));
+        $address->building = trim(strip_tags($post['building']));
+        $address->apartment = trim(strip_tags($post['apartment']));
+        $address->entrance = trim(strip_tags($post['entrance']));
+        $address->doorphone_code = trim(strip_tags($post['doorphone_code']));
+        $address->floar = trim(strip_tags($post['floar']));
+        $street = ($address->street) ? $address->street.', ' : '';
+        $house = ($address->house) ? 'Дом '.$address->house.', ' : '';
+        $building = ($address->building) ? 'Корпус '.$address->building.', ' : '';
+        $apartment = ($address->apartment) ? 'Кв. '.$address->apartment.', ' : '';
+        $entrance = ($address->entrance) ? 'Подъезд '.$address->entrance.', ' : '';
+        $doorphone_code = ($address->doorphone_code) ? 'Код'.$address->doorphone_code.', ' : '';
+        $floar = ($address->floar) ? 'Этаж '.$address->floar.', ' : '';
+        $address->full_address = $street.$house.$building.$apartment.$entrance.$doorphone_code.$floar;
+
+
         $this->layout='main_added.twig';
         if( $address->save())
         {
 
 
-            return $this->renderAjax('added.twig',['address' => $address]);
-        }
-        return ['status' => false];
+            return ['status'=>true,'address'=>$address->full_address];
 
-
-    }
-    public function actionChangeAddress()
-    {
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $request=Yii::$app->request;
-        if(!$request->isAjax)
-        {
-            throw new BadRequestHttpException();
-        }
-        $post = $request->post();
-        $address =  AddressDelivery::find()->where(['id'=>$post['id']])->limit(1)->one();
-
-        $address->address = $post['address'];
-
-        if( $address->update())
-        {
-            return 'success';
-        }
-        return ['status' => false];
-
-
-    }
-    public function actionDeleteAddress()
-    {
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $request=Yii::$app->request;
-        if(!$request->isAjax)
-        {
-            throw new BadRequestHttpException();
-        }
-        $post = $request->post();
-        $address = AddressDelivery::find()->where(['id'=>$post['id']])->limit(1)->one();
-
-        if( $address->delete())
-        {
-
-            return 'success';
         }
         return ['status' => false];
 
 
     }
 
-    public function actionOrders()
-    {
-        Yii::$app->view->registerMetaTag([
-            'name' => 'robots',
-            'content' => 'NOINDEX,NOFOLLOW'
-        ]);
-        SeoComponent::setByTemplate('user', [
-            'name' => Yii::$app->params->view['user_orders'],
-        ]);
-        $orders = Yii::$app->user->identity->orders;
 
-        return $this->render('orders.twig',[
-            'orders'   =>  $orders,
-        ]);
-    }
-    public function actionQuestion()
-    {
-        Yii::$app->view->registerMetaTag([
-            'name' => 'robots',
-            'content' => 'NOINDEX,NOFOLLOW'
-        ]);
-        SeoComponent::setByTemplate('user', [
-            'name' => Yii::$app->params->view['user_question'],
-        ]);
 
-        return $this->render('question.twig',[
 
-        ]);
-    }
-    public function actionSaveQuestion()
-    {
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        $request=Yii::$app->request;
-        if(!$request->isAjax)
-        {
-            throw new BadRequestHttpException();
-        }
-        $post = $request->post();
-        $model = new \common\models\Question();
-        $model->name            = isset($post['name']) ? strip_tags($post['name']) : '';
-        $model->phone            = isset($post['phone']) ? strip_tags($post['phone']) : '';
-        $model->question        =isset($post['comment']) ? strip_tags($post['comment']) : '';
-        $model->user_id         = Yii::$app->user->identity->id;
-        $model->creation_time   = date('U');
-        if($model->save())
-        {
-            return true;
-        }
-        return ['status' => false];
-    }
 }

@@ -25,15 +25,16 @@ $(document).ready(function(){
         ;});
     $("form#sign-up").on('submit',function(e){
         e.preventDefault();
+
         $.ajax({
             type: 'POST',
             url: '/auth/sign-up',
+            dataType: 'json',
             data: $( this ).serialize(),
             success: function (data) {
-                if(data=='success')
+                if(data.answer=='success')
                 {
-                    $('#sign-up').trigger("reset");
-                    $('.js-registration-answer').text('Вы успешно зарегестрированы, вам на почту выслано сообщение с подтверждением');
+                    location.href=data.url;
                 }
                 else
                 {
@@ -55,6 +56,7 @@ $(document).ready(function(){
             success: function (data) {
                 if(data.answer=='success')
                 {
+
                     location.href=data.url;
                 }
                 else
@@ -78,8 +80,8 @@ $(document).ready(function(){
             success: function (data) {
                 if(data=='success')
                 {
-                    $('.js-successs').text(data);
-                    $('#modal_1_success').modal('toggle');
+                    $('.js-change-settings').text(data);
+
 
                 }
                 else
@@ -93,7 +95,60 @@ $(document).ready(function(){
             }
         });
     });
-    $(document).on('click', '.js-change-password', function(e){
+    $("form#add-address").on('submit',function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '/user/add-address',
+            data: $( this ).serialize(),
+            success: function (data) {
+                if(data.status==true)
+                {
+
+
+                    $('.js-add-address').text(data.address);
+                    $('.js-form-personal-address').hide();
+                }
+                else
+                {
+                    $('.js-registration-answer').text(data);
+                }
+
+            },
+            error: function (error) {
+                $('form#callback').find('.bad-msg').fadeIn();
+            }
+        });
+    });
+    $("form#js-change-password").on('submit',function(e){
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '/user/change-password',
+            data: $( this ).serialize(),
+            success: function (data) {
+                if(data.status==true)
+                {
+
+
+                    $('.js-change-password').text(data.text);
+                    $('#js-change-password').trigger("reset");
+                }
+                else
+                {
+                    $('.js-change-password').text(data.text);
+
+                }
+
+            },
+            error: function (error) {
+                $('form#callback').find('.bad-msg').fadeIn();
+            }
+        });
+    });
+   /* $(document).on('click', '.js-change-password', function(e){
         e.preventDefault();
         var password = $('#password').val()
                 $.ajax({
@@ -111,7 +166,7 @@ $(document).ready(function(){
             }
 
         })
-        ;});
+        ;});*/
     $(document).on('click', '.js-delivery-add', function(e){
         e.preventDefault();
         var address = $('#address').val();

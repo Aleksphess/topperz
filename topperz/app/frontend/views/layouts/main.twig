@@ -35,18 +35,22 @@
         <nav class="mobile-nav">
             <div class="mobile-nav__inner">
                 <div class="mobile-nav__block is--centered">
-                    <div class="inline"><a class="mobile-nav__link" href="/registration.html">Войти</a></div>
+                    <div class="inline">{% if app.user.isGuest %}<a class="mobile-nav__link" href="{{ Url.toRoute('/login') }}">Войти</a>{% endif %}</div>
                     <div class="langs is--mobile"><a class="langs__item" href="">Kz</a><a class="langs__item is--current" href="">Ru</a><a class="langs__item" href="">En</a></div>
                 </div>
                 {{ head_menu_widget({'mobile':true}) }}
                 <div class="mobile-nav__block">
                     <h4 class="mobile-nav__title">Личный кабинет</h4>
                     <ul class="mobile-nav__list">
-                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Личные данные</a></li>
-                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">История заказов</a></li>
-                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Адреса</a></li>
-                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Смена пароля</a></li>
-                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="/personal.html">Ваша скидка</a></li>
+
+                        {% if not(app.user.isGuest) %}
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="{{ Url.toRoute('/user/index') }}">Личные данные</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="{{ Url.toRoute('/user/index') }}">История заказов</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="{{ Url.toRoute('/user/index') }}">Адреса</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="{{ Url.toRoute('/user/index') }}">Смена пароля</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="{{ Url.toRoute('/user/index') }}">Ваша скидка</a></li>
+                        <li class="mobile-nav__item"><a class="mobile-nav__link" href="{{ Url.toRoute('/logout') }}">Выйти</a></li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="mobile-nav__block">
@@ -95,9 +99,14 @@
         <div class="header__user-auth">
             <div class="user-auth">
                 <div class="user-auth__avatar"><i class="icon icon-user"></i></div>
-                <div class="user-auth__details"><a class="user-auth__user-name" href="personal.html">Евгений</a><a class="user-auth__user-logout" href="registration.html">(выйти)</a>
-                    <div class="user-auth__user-discount">ваша скидка 5%</div>
+                {% if not(app.user.isGuest) %}
+                <div class="user-auth__details"><a class="user-auth__user-name" href="{{ Url.toRoute('/user/index') }}">{{ app.user.identity.username }}</a><a class="user-auth__user-logout" href="{{ Url.toRoute('/logout') }}">(выйти)</a>
+                    <div class="user-auth__user-discount">ваша скидка {{ app.user.identity.discount }}%</div>
                 </div>
+                {% else %}
+                <div class="user-auth__details"><a class="user-auth__user-name" href="{{ Url.toRoute('/login') }}">Войти</a>
+                </div>
+                {% endif %}
             </div>
         </div>
         <div class="header__cart"><a class="cart" href="cart.html"><span class="cart__icon"><i class="icon icon-cart"></i></span><span class="cart__details"><span class="cart__details-text">Корзина </span><span class="cart__details-qty">(12)</span></span></a></div>
@@ -255,7 +264,9 @@
     </div>
 </div>
 
+{#
 <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+#}
 
 
 

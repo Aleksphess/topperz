@@ -32,6 +32,11 @@ class admin_menu extends AdminTable
         $this->fld[] = new Field("update_time", "Date of update", 4);
     }
     function afterAdd($row) {
+        if (empty($row['alias'])) {
+            $qup = "UPDATE " . $this->TABLE . " SET alias = '" . Translit($row['title_1'])."' WHERE id = "
+                . $row['id'];
+            pdoExec($qup);
+        }
 
         YandexTranslate($row, $this->TABLE);
 

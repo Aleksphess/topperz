@@ -1,100 +1,254 @@
 
-<section class="personal_account_page">
+<nav class="breadcrumbs">
+    <div class="container"><a class="breadcrumbs__item" href="index.html">Главная</a><a class="breadcrumbs__item" href="personal.html">Личный кабинет</a>
+    </div>
+</nav>
+<main class="personal">
     <div class="container">
-        <div class="account_box">
-            <div class="nav">
-                <ul class="list_menu">
-                    <li class="item active">
-                        <div class="icon"><i class="fas fa-user"></i></div>
-                        <a href="" class="link">{#Личные данные#}{{ this.params.your_data }}</a>
-                    </li>
-
-                    <li class="item">
-                        <div class="icon"><i class="fas fa-list"></i></div>
-                        <a href="{{ Url.toRoute('/user/orders') }}" class="link">{#История заказов#}{{ this.params.history_orders }}</a>
-                    </li>
-
-                    <li class="item">
-                        <div class="icon"><i class="fas fa-question-circle"></i></div>
-                        <a href="{{ Url.toRoute('/user/question') }}" class="link">{#Задать вопрос#}{{ this.params.question }}</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="content_personal_account">
-                <div class="head">{#Добро пожаловать#}{{ this.params.welcome }}, <span>{{ app.user.identity.username }}</span></div>
-                <div class="form_box">
-                    <form action="" id="change-settings" class="form_order">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="full_name">{#ФИО#}{{ this.params.fio }}:</label>
-                                <input type="text" name="username" class="full_name" id="username" placeholder="{{ this.params.insert_name }}" value="{{ app.user.identity.username }}">
+        <h1 class="page__title">Личный кабинет</h1>
+        <div class="tabs js-tabs">
+            <div class="tabs__list"><a class="tabs__list-item is--active js-tabs-item" href="#info">Личные данные</a><a class="tabs__list-item js-tabs-item" href="#history">История заказов</a><a class="tabs__list-item js-tabs-item" href="#address">Адреса</a><a class="tabs__list-item js-tabs-item" href="#password">Смена пароля</a><a class="tabs__list-item js-tabs-item" href="#discount">Ваша скидка</a></div>
+            <div class="tabs__content js-tabs-content is--active" id="info">
+                <div class="row">
+                    <div class="col col--5-of-12 col--s-12-of-12 col--m-12-of-12 col--l-5-of-12">
+                        <form class="form js-form-personal-info" id="change-settings" action="">
+                            <div class="form__field">
+                                <label class="form__label">Фамилия</label>
+                                <input class="form__input" type="text" name="surname" value="{{ app.user.identity.surname }}">
                             </div>
-
-                            <div class="col-md-6">
-                                <label for="phone">{{ this.params.phone }}</label>
-                                <input type="tel" name="phone" class="phone" id="phone" placeholder="+38 (067) 562 11 22" value="{{ app.user.identity.phone }}">
+                            <div class="form__field">
+                                <label class="form__label">Имя</label>
+                                <input class="form__input" type="text" name="username" value="{{ app.user.identity.username }}">
                             </div>
-
-                            <div class="col-md-6">
-
-                                <label for="email">E-mail</label>
-                                <input type="email" name="email" class="email" id="email" placeholder="IvanovInav@gmail.com" value="{{ app.user.identity.email }}">
-
+                            <div class="form__field">
+                                <label class="form__label">Отчество</label>
+                                <input class="form__input" type="text" name="middle_name" value="{{ app.user.identity.middle_name }}">
                             </div>
+                            <div class="form__field form__field--select">
+                                <div class="form__select">
+                                    <div class="form__input form__input--dummy js-choose-date-toggler">{{ app.user.identity.date }}</div>
+                                    <input class="is--hidden js-choose-date-input" type="text" name="birthday" value="{{ app.user.identity.date }}">
 
-                            <div class="col-md-6">
-                                <label for="password">{#Парол#}{{ this.params.password }}</label>
-                                <input type="password" name="password" class="password" id="password" value="wefwefewfwef">
-                                <button class="btn_password js-change-password">Изменить</button>
-                                <span class="js-password-change" ></span>
+                                    <div class="choose-date js-choose-date">
+                                        <div class="choose-date__inner">
+                                            <div class="choose-date__header">
+                                                <div class="choose-date__text">установить дату</div>
+                                                <div class="choose-date__title js-choose-date-title">Декабрь 29, 2017</div>
+                                            </div>
+                                            <div class="choose-date__body js-choose-date">
+                                                <div class="choose-date__item is--one-third"><i class="icon icon-plus choose-date__item-plus js-choose-date-change"></i>
+                                                    <div class="choose-date__item-input js-choose-date-value" data-type="year">2017</div><i class="icon icon-minus choose-date__item-minus js-choose-date-change" data-incriment="minus"></i>
+                                                </div>
+                                                <div class="choose-date__item is--one-third"><i class="icon icon-plus choose-date__item-plus js-choose-date-change"></i>
+                                                    <div class="choose-date__item-input js-choose-date-value" data-index="11" data-type="month">Декабрь</div><i class="icon icon-minus choose-date__item-minus js-choose-date-change" data-incriment="minus"></i>
+                                                </div>
+                                                <div class="choose-date__item is--one-third"><i class="icon icon-plus choose-date__item-plus js-choose-date-change"></i>
+                                                    <div class="choose-date__item-input js-choose-date-value" data-type="day">23</div><i class="icon icon-minus choose-date__item-minus js-choose-date-change" data-incriment="minus"></i>
+                                                </div>
+                                            </div>
+                                            <div class="choose-date__action"></div><a class="btn btn--primary btn--sm btn--centered js-choose-date-action" href="">Установить</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            {%  if not(app.user.identity.address) %}
-                            <div class="col-md-12">
-                                <div class="js-render"></div>
+                            <div class="form__field">
+                                <label class="form__label">Телефон</label>
+                                <input class="form__input" type="text" name="phone" value="{{ app.user.identity.phone }}">
                             </div>
-                            {% endif %}
-                            {%  if app.user.identity.address %}
-                            <div class="col-md-12">
-                                <label for="address">{#Адрес доставки#}{{ this.params.delivery_address }}:</label>
-                                {% for address in app.user.identity.address %}
-                                <input type="text" name="address" class="address js-none-{{ address.id }} js-change-{{ address.id }}"  placeholder="адрес доставки" value="{{ address.address }}">
-                                    <button data-id="{{ address.id }}" class=" btn_address_delete js-none-{{ address.id }} js-delete-address">×</button><span class="js-success-change-{{ address.id }}"></span>{#<br>#}
-
-                                    <button class="btn_address js-none-{{ address.id }} js-change-address" data-id="{{ address.id }}">{{ this.params.change }}</button>
-                                {% endfor %}
-                                <div class="js-render"></div>
+                            <div class="form__field">
+                                <label class="form__label">Дополнительный телефон</label>
+                                <input class="form__input" type="text" name="phone_alt" value="{{ app.user.identity.dop_phone }}">
                             </div>
-                            {% endif %}
-
-
-                            <div class="col-md-12">
-                                <label for="address">{#Добавить#}{{ this.params.addd }} {{ this.params.delivery_address }}</label>
-                                <input type="text" name="address" class="address" id="address" placeholder="адрес доставки">
-                                <button class="btn_address js-delivery-add">{#Добавить#}{{ this.params.added }}</button>
-                                <span class="js-delivery-add-success"></span>
+                            <div class="form__field">
+                                <label class="form__label">Email</label>
+                                <input class="form__input" type="text" name="email" value="{{ app.user.identity.email }}">
                             </div>
-
-                            <div class="col-sm-6 col-md-6">
-                                <label for="social_network">{#Соц. сети#}{{ this.params.socials }}</label>
-                                <input type="text" id="vk" name="vk" class="social_network vk" placeholder="vk.com/IvanovInav"  value="{{ app.user.identity.vk }}" >
+                            {#<div class="form__field">
+                                <input class="form__checkbox" type="checkbox" name="checkbox" id="subscribe" {% if app.user.identity.discount==1 %}checked{% endif %}>
+                                <label for="subscribe">Хочу получать информацию об Акциях для подписчиков</label>
+                            </div>#}
+                            <div class="form__action">
+                                <button class="btn btn--primary btn--lg" type="submit">Сохранить</button>
                             </div>
-
-                            <div class="col-sm-6 col-md-6">
-                                <input type="text" id="facebook" name="facebook" class="social_network fb" placeholder="аи.com/IvanovInav"  value="{{ app.user.identity.facebook }}">
-                            </div>
-
-                            <div class="col-sm-12 col-md-12">
-                                <button type="submit" class="btn_save_changes"{#Сохранить изменения#}{{ this.params.save_changes }}</button>
-                                <span class="js-success" ></span>
-                            </div>
-
-                        </div>
-
-                    </form>
+                            <span class="js-change-settings"></span>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <div class="tabs__content js-tabs-content" id="history">
+                <table class="personal__order">
+                    <tr>
+                        <th>Номер заказа:</th>
+                        <td>2577965</td>
+                    </tr>
+                    <tr>
+                        <th>Дата:</th>
+                        <td>15.12.2017   10:19</td>
+                    </tr>
+                    <tr>
+                        <th>Адрес:</th>
+                        <td>Ломоносова ул 11, 55</td>
+                    </tr>
+                    <tr>
+                        <th>Телефон:</th>
+                        <td>+38 098 115 75 35</td>
+                    </tr>
+                    <tr>
+                        <th>Заказ:</th>
+                        <td>
+                            х1 <a href="">Black Капрезе</a> 38см<br>х1 <a href="">Четыре сыра</a> 38см</td>
+                    </tr>
+                    <tr>
+                        <th>ВСЕГО:</th>
+                        <td>4 380 <span>тнг</span><br><a href="">Повторить заказ</a></td>
+                    </tr>
+                </table>
+                <table class="personal__order">
+                    <tr>
+                        <th>Номер заказа:</th>
+                        <td>2577965</td>
+                    </tr>
+                    <tr>
+                        <th>Дата:</th>
+                        <td>15.12.2017   10:19</td>
+                    </tr>
+                    <tr>
+                        <th>Адрес:</th>
+                        <td>Ломоносова ул 11, 55</td>
+                    </tr>
+                    <tr>
+                        <th>Телефон:</th>
+                        <td>+38 098 115 75 35</td>
+                    </tr>
+                    <tr>
+                        <th>Заказ:</th>
+                        <td>
+                            х1 <a href="">Black Капрезе</a> 38см<br>х1 <a href="">Четыре сыра</a> 38см</td>
+                    </tr>
+                    <tr>
+                        <th>ВСЕГО:</th>
+                        <td>4 380 <span>тнг</span><br><a href="">Повторить заказ</a></td>
+                    </tr>
+                </table>
+                <table class="personal__order">
+                    <tr>
+                        <th>Номер заказа:</th>
+                        <td>2577965</td>
+                    </tr>
+                    <tr>
+                        <th>Дата:</th>
+                        <td>15.12.2017   10:19</td>
+                    </tr>
+                    <tr>
+                        <th>Адрес:</th>
+                        <td>Ломоносова ул 11, 55</td>
+                    </tr>
+                    <tr>
+                        <th>Телефон:</th>
+                        <td>+38 098 115 75 35</td>
+                    </tr>
+                    <tr>
+                        <th>Заказ:</th>
+                        <td>
+                            х1 <a href="">Black Капрезе</a> 38см<br>х1 <a href="">Четыре сыра</a> 38см</td>
+                    </tr>
+                    <tr>
+                        <th>ВСЕГО:</th>
+                        <td>4 380 <span>тнг</span><br><a href="">Повторить заказ</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tabs__content js-tabs-content" id="address">
+                <div class="row">
+                    <div class="col col--5-of-12 col--s-12-of-12 col--m-12-of-12 col--l-5-of-12">
+                        <div class="personal__addresses">
+                            {% for address in app.user.identity.address %}
+                            <div class="personal__address">{{ address.full_address }}</div>
+                            {% endfor %}
+                            <div class="personal__address js-add-address"></div>
+                        </div>
+                        <form class="form js-form-personal-address" id="add-address" action="">
+                            <div class="form__title">Добавить адрес</div>
+                            <div class="form__field">
+                                <label class="form__label">Улица</label>
+                                <input class="form__input" type="text" name="street">
+                            </div>
+                            <div class="row">
+                                <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                                    <div class="form__field">
+                                        <label class="form__label">Дом</label>
+                                        <input class="form__input" type="text" name="house">
+                                    </div>
+                                </div>
+                                <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                                    <div class="form__field">
+                                        <label class="form__label">Корпус</label>
+                                        <input class="form__input" type="text" name="building">
+                                    </div>
+                                </div>
+                                <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                                    <div class="form__field">
+                                        <label class="form__label">Квартира / Офис</label>
+                                        <input class="form__input" type="text" name="apartment">
+                                    </div>
+                                </div>
+                                <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                                    <div class="form__field">
+                                        <label class="form__label">Подъезд</label>
+                                        <input class="form__input" type="text" name="entrance">
+                                    </div>
+                                </div>
+                                <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                                    <div class="form__field">
+                                        <label class="form__label">Код домофона</label>
+                                        <input class="form__input" type="text" name="doorphone_code">
+                                    </div>
+                                </div>
+                                <div class="col col--6-of-12 col--s-12-of-12 col--m-12-of-12 col--l-6-of-12">
+                                    <div class="form__field">
+                                        <label class="form__label">Этаж</label>
+                                        <input class="form__input" type="text" name="floar">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col--12-of-12 col--s-12-of-12 col--m-12-of-12 col--l-12-of-12">
+                                    <div class="form__action">
+                                        <button class="btn btn--primary btn--lg" type="submit">Сохранить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs__content js-tabs-content" id="password">
+                <div class="row">
+                    <div class="col col--5-of-12 col--s-12-of-12 col--m-12-of-12 col--l-5-of-12">
+                        <form class="form js-form-personal-passsword" id="js-change-password" action="">
+                            <div class="form__field">
+                                <label class="form__label">Старый пароль</label>
+                                <input class="form__input" type="password" name="old_password">
+                            </div>
+                            <div class="form__field">
+                                <label class="form__label">Новый пароль</label>
+                                <input class="form__input" type="password" name="new_password">
+                            </div>
+                            <div class="form__field">
+                                <label class="form__label">Повторите пароль</label>
+                                <input class="form__input" type="password" name="repeat_password">
+                            </div>
+                            <div class="form__action">
+                                <button class="btn btn--primary btn--lg" type="submit">Сохранить</button>
+                            </div>
+                            <span class="js-change-password"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs__content js-tabs-content" id="discount">
+                <div class="personal__discount">Ваша скидка {{ app.user.identity.discount }}</div><a class="btn btn--primary btn--lg" href="{{ Url.toRoute('/get-sale') }}">Как получить скидку</a>
+            </div>
         </div>
-
-
     </div>
-</section>
+</main>

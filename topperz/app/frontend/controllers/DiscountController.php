@@ -43,7 +43,7 @@ class DiscountController extends \common\components\BaseController
         SeoComponent::setByTemplate('default', [
             'name' => 'Акции',
         ]);
-        $discounts = Discounts::find()->active()->joinWith('info')->all();
+        $discounts = Discounts::find()->active()->all();
 
         return $this->render('index.twig',[
             'discounts'=>$discounts

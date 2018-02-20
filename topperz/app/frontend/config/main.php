@@ -61,11 +61,71 @@ return [
                     'route'     => 'content/index',
                     'suffix'    => ''
                 ],
+                [
+                    'pattern'   => 'logout',
+                    'route'     => 'auth/logout',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'user/index',
+                    'route'     => 'user/index',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'user/add-address',
+                    'route'     => 'user/add-address',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'user/change-password',
+                    'route'     => 'user/change-password',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'user/change-settings',
+                    'route'     => 'user/change-settings',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'auth/sign-in',
+                    'route'     => 'auth/sign-in',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'auth/sign-up',
+                    'route'     => 'auth/sign-up',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'login',
+                    'route'     => 'content/login',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'discounts/<alias>',
+                    'route'     => 'discount/view',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => 'discounts',
+                    'route'     => 'discount/index',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => '<alias:about|contacts|payment|delivery|get-sale>',
+                    'route'     => 'content/static',
+                    'suffix'    => ''
+                ],
 
 
                 [
                     'pattern'   => '<alias>/page/<page>',
                     'route'     => 'catalog/category',
+                    'suffix'    => ''
+                ],
+                [
+                    'pattern'   => '<alias>/<type:classic|proprietary>/sort/<sort>',
+                    'route'     => 'catalog/sort',
                     'suffix'    => ''
                 ],
                 [

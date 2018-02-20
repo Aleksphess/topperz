@@ -84,7 +84,7 @@ class CatalogController extends \common\components\BaseController
     //->orderBy([new \yii\db\Expression("FIELD(label_id,  1,3,2,-1)")]) сортировка по выражению
 
 
-    public function actionSort($alias, $sort)
+    public function actionSort($alias,$type=null, $sort)
     {
         if ($alias != null and $alias != 'category') {
             $category = CatalogCategories::find()->joinWith('info')
@@ -98,8 +98,12 @@ class CatalogController extends \common\components\BaseController
                 throw new NotFoundHttpException('Not Found!', 404);
             }
         }
-        $query = CatalogProducts::find()->andWhere(['category_id'=>$category->id])->joinWith('info','params')
-            ->joinWith('consists','topics');
+        $query = (is_null($type)) ?
+            CatalogProducts::find()->andWhere(['category_id'=>$category->id])->joinWith('info','params')
+            ->joinWith('consists','topics')
+            :
+            CatalogProducts::find()->andWhere(['category_id'=>$category->id])->andWhere(['type'=>$type])
+                ->joinWith('info','params')->joinWith('consists','topics');
         if ($sort == 'asc')
         {
             $products=$query->orderBy('price asc')->all();
@@ -128,6 +132,8 @@ class CatalogController extends \common\components\BaseController
         return $this->render('category.twig', [
             'category'  => $category,
             'products'      => $products,
+            'sort'          => $sort,
+            'type'          => $type
             
 
 
@@ -164,6 +170,7 @@ class CatalogController extends \common\components\BaseController
         return $this->render('category.twig', [
             'category'  => $category,
             'products'      => $products,
+            'type'          => $type,
 
 
 

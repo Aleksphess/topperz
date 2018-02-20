@@ -1,42 +1,16 @@
-<div class="breadcrumbs_contacts_page">
-    <div class="container">
-        <ul class="bread_list">
-            <li class="item">
-                <a href="{{ Url.home() }}" class="link">{{ this.params.main }}</a>
-            </li>
-            <li class="item">
-                <span> / </span>
-            </li>
-            <li class="item">
-                <a href="{{ Url.toRoute('/discounts') }}" class="link">{{ this.params.discounts }}</a>
-            </li>
-            <li class="item">
-                <span> / </span>
-            </li>
-            <li class="item">
-                <a {#href="{{ discount.url }}"#} class="link">{{ discount.info.title }}</a>
-            </li>
-
-        </ul>
+<nav class="breadcrumbs">
+    <div class="container"><a class="breadcrumbs__item" href="index.html">Главная</a><a class="breadcrumbs__item" href="specials.html">Акции</a><a class="breadcrumbs__item" href="special.html">Название акции</a>
     </div>
+</nav>
+{% set mnths = ['','января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'] %}
 
-</div>
-
-<div class="delivery_page">
+<main class="page__inner">
     <div class="container">
-        <h1 class="head_section">
-            {{ discount.info.title }}
-        </h1>
-
-        {{ discount.info.text|raw }}
-        <div class="seo_txt">
-            
-            <div class="txt">
-                {{ Seo.get('text')|raw  }}
-            </div>
+        <h1 class="page__title">{{ discount.info.title }}</h1><img src="{{ discount.bimg }}" alt="">
+        <date class="page__date">{{ discount.date|date('d') }} {{ mnths[discount.date|date('n')] }} {{ discount.date|date('Y') }}</date>
+        <p>{{ discount.info.text|raw }}</p>
+        <div class="social-icons is--share">
+            <div class="social-icons__text">Поделиться</div><a class="social-icons__link" href=""><i class="icon icon-facebook"></i></a><a class="social-icons__link" href=""><i class="icon icon-instagram"></i></a><a class="social-icons__link" href=""><i class="icon icon-vk"></i></a>
         </div>
     </div>
-
-
-
-</div>
+</main>
